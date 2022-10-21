@@ -28,11 +28,12 @@ class CardDeck:
         self.trump = self.deck[0]
 
     def get(self) -> str:
-        ans = 'EMPTY!'
+        ans = ''
 
         if self.amount:
             self.amount -= 1
             ans = self.deck.pop(-1)
+        else:
+            self.trump = ''
 
         return ans
-
