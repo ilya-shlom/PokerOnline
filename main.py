@@ -33,7 +33,5 @@ class CardDeck:
         if self.amount:
             self.amount -= 1
             ans = self.deck.pop(-1)
-        else:
-            self.trump = ''
 
         return ans
