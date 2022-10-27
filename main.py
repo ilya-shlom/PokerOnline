@@ -36,4 +36,3 @@ class CardDeck:
 
         return ans
 
-print('eee boy')
