@@ -2,11 +2,24 @@ from classes import *
 
 
 # c_on_t - card on table, inp - player's input
-def check_cards(c_on_t, inp):
+def check_card(c_on_t, inp):
     if inp[0] == c_on_t[0]:
         return inp[1] > c_on_t[1]
     else:
         return inp[0] == tr
+
+
+# c_on_t - card on table, inp - player's input, pl - current player
+def cover_card(c_on_t, inp, pl):
+    if check_card(c_on_t, inp):
+        pl.put_card(inp)
+    else:
+        print("Choose another card!")
+
+
+# c_on_t - card on table, inp - player's input, pl - current player
+def get_from_table(pl):
+    pl.get_card(table.pop())
 
 
 def end_move(current_table, current_used):
@@ -38,6 +51,7 @@ for p in players:
 
 table = []
 playing_now = 0
+
 while players[playing_now].hand_deck > 0 and players[(playing_now + 1) % len(players)].hand_deck > 0:
     print(players[0].hand_deck)
     print("Choose card: ")
@@ -49,6 +63,4 @@ while players[playing_now].hand_deck > 0 and players[(playing_now + 1) % len(pla
             players[0].put_card(chosen_card)
         else:
             chosen_card = None
-
-
 
