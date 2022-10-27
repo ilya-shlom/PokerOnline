@@ -54,4 +54,3 @@ class Player:
         for card in cards:
             self.amount -= 1
             self.hand_deck.remove(card)
-
