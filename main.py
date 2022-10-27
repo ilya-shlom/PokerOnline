@@ -50,10 +50,22 @@ class Player:
             self.amount += 1
             self.hand_deck.append(card)
 
-    def put_card(self, *cards):
-
+    def put_card(self, cards):
+        for card in cards:
             self.amount -= 1
             self.hand_deck.remove(card)
 
     # aaaaa
 
+
+pl = Player()
+deck = CardDeck()
+deck.mix()
+for i in range(6):
+    pl.get_card(deck.get())
+pl.hand_deck.sort()
+print(pl.hand_deck)
+pl.put_card(input().split())
+print(pl.hand_deck)
+pl.get_card("C8 C9".split())
+print(pl.hand_deck)
