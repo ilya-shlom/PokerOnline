@@ -5,8 +5,7 @@ import random
 
 class CardDeck:
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
         self.amount = 36
 
         # D - diamonds, H - hearts, C - clubs, S - spades

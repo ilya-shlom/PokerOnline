@@ -45,7 +45,7 @@ def give_cards(player_to_give, current_deck):
             break
 
 
-players = [Player('# 1'), Player('# 1')]
+players = [Player('# 1'), Player('# 2')]
 
 deck = CardDeck()
 deck.mix()
