@@ -36,3 +36,8 @@ class CardDeck:
 
         return ans
 
+
+class Player:
+    def __init__(self):
+        self.amount = 0
+        self.hand_deck = []
