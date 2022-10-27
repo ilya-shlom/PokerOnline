@@ -45,11 +45,12 @@ class Player:
         # cards in player's hand
         self.hand_deck = []
 
-    def get_card(self, card):
-        self.hand_deck.append(card)
-        self.amount += 1
+    def get_card(self, *cards):
+        for card in cards:
+            self.amount += 1
+            self.hand_deck.append(card)
 
-    def put_on_table(self, *cards):
+    def put_card(self, *cards):
         for card in cards:
             self.amount -= 1
             self.hand_deck.remove(card)
