@@ -1,6 +1,14 @@
 from classes import *
 
-players = [Player(), Player()]
+table = []
+
+
+def put_on_table(c_name, pl):
+    pl.putcard(c_name)
+    table.append([c_name, ])
+
+
+players = [Player('# 1'), Player('# 1')]
 
 deck = CardDeck()
 deck.mix()
