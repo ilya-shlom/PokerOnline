@@ -51,7 +51,7 @@ class Player:
             self.hand_deck.append(card)
 
     def put_card(self, *cards):
-        for card in cards:
+
             self.amount -= 1
             self.hand_deck.remove(card)
 
