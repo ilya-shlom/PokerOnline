@@ -5,8 +5,7 @@ import random
 
 class CardDeck:
 
-    def __init__(self, name):
-        self.name = name
+    def __init__(self):
         self.amount = 36
 
         # D - diamonds, H - hearts, C - clubs, S - spades
@@ -18,7 +17,7 @@ class CardDeck:
             'S6', 'S7', 'S8', 'S9', 'SA', 'SB', 'SC', 'SD', 'SE'
         ]
 
-        self.trump = self.deck[0][0]
+        self.trump = self.deck[0]
 
     def mix(self):
         for i in range(256):
@@ -26,7 +25,7 @@ class CardDeck:
             ind2 = random.randint(0, self.amount - 1)
             self.deck[ind1], self.deck[ind2] = self.deck[ind2], self.deck[ind1]
 
-        self.trump = self.deck[0][0]
+        self.trump = self.deck[0]
 
     def get(self) -> str:
         ans = ''
