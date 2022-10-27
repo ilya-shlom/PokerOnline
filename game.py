@@ -1,5 +1,5 @@
 from classes import *
-
+from cheats import *
 
 table = []
 used = []
@@ -45,11 +45,12 @@ def give_cards(player_to_give, current_deck):
     player_to_give.hand_deck.sort()
 
 
-players = [Player('# 1'), Player('# 2'), Player('# 3'), Player('# 4')]
+players = [Player('# 1'), Player('# 2')]
 
 deck = CardDeck()
 deck.mix()
-tr = deck.trump
+tr = deck.trump[0]
+tr_card = deck.trump
 
 for p in players:
     for i in range(6):
@@ -59,11 +60,13 @@ for p in players:
 playing_now = 0
 
 print("--------------- SHULER ONLINE ---------------")
-print(f'Trump is {tr}')
+print(f'Trump is {tr_card}')
 while len(players[playing_now].hand_deck) > 0 and len(players[abs((playing_now - 1)) % len(players)].hand_deck) > 0:
     print(f'New Round: Player {playing_now + 1}')
     # 1st player
     print(players[playing_now].hand_deck)
+    print(f'Probably deck: {prob_deck_build(used, players[playing_now].hand_deck, tr_card)}')
+    print(f'Sure deck: {sure_deck}')
     chosen_card = None
     while not chosen_card:
         print("Choose card: ", end='')
@@ -88,6 +91,7 @@ while len(players[playing_now].hand_deck) > 0 and len(players[abs((playing_now -
             end_move()
             playing_now = (playing_now + 1) % len(players)
         elif chosen_card == "TAKE":
+            sure_deck_build(table)
             get_from_table(players[(playing_now+1) % len(players)])
             print(players[(playing_now + 1) % len(players)].hand_deck)
             playing_now = (playing_now + 2) % len(players)
