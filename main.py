@@ -21,8 +21,8 @@ class CardDeck:
 
     def mix(self):
         for i in range(256):
-            ind1 = random.randint(0, 35)
-            ind2 = random.randint(0, 35)
+            ind1 = random.randint(0, self.amount - 1)
+            ind2 = random.randint(0, self.amount - 1)
             self.deck[ind1], self.deck[ind2] = self.deck[ind2], self.deck[ind1]
 
         self.trump = self.deck[0]
