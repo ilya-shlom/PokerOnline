@@ -4,6 +4,7 @@ players = [Player(), Player()]
 
 deck = CardDeck()
 deck.mix()
+used = []
 
 for p in players:
     for i in range(6):
