@@ -18,7 +18,7 @@ class CardDeck:
             'S6', 'S7', 'S8', 'S9', 'SA', 'SB', 'SC', 'SD', 'SE'
         ]
 
-        self.trump = self.deck[0]
+        self.trump = self.deck[0][0]
 
     def mix(self):
         for i in range(256):
@@ -26,7 +26,7 @@ class CardDeck:
             ind2 = random.randint(0, self.amount - 1)
             self.deck[ind1], self.deck[ind2] = self.deck[ind2], self.deck[ind1]
 
-        self.trump = self.deck[0]
+        self.trump = self.deck[0][0]
 
     def get(self) -> str:
         ans = ''
@@ -40,7 +40,9 @@ class CardDeck:
 
 class Player:
 
-    def __init__(self):
+    def __init__(self, name):
+        # name of a player
+        self.name = name
         # num of cards in player's hand
         self.amount = 0
         # cards in player's hand
