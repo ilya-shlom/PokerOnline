@@ -1,6 +1,14 @@
 from classes import *
 
 
+table = []
+
+
+def put_on_table(c_name, pl):
+    pl.putcard(c_name)
+    table.append([c_name, ])
+
+
 # c_on_t - card on table, inp - player's input
 def check_card(c_on_t, inp):
     if inp[0] == c_on_t[0]:
@@ -49,7 +57,6 @@ for p in players:
         p.get_card(deck.get())
     p.hand_deck.sort()
 
-table = []
 playing_now = 0
 
 while players[playing_now].hand_deck > 0 and players[(playing_now + 1) % len(players)].hand_deck > 0:
