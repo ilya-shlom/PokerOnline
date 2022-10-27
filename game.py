@@ -6,6 +6,7 @@ def check_
 
 players = [Player(), Player()]
 
+
 deck = CardDeck()
 deck.mix()
 tr = deck.trump
