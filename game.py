@@ -14,8 +14,6 @@ def check_cards(c_on_t, inp):
         return False
 
 
-
-
 players = [Player(), Player()]
 
 deck = CardDeck()
