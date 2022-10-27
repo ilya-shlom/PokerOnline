@@ -4,14 +4,9 @@ from classes import *
 # c_on_t - card on table, inp - player's input
 def check_cards(c_on_t, inp):
     if inp[0] == c_on_t[0]:
-        if inp[1] > c_on_t[1]:
-            return True
-        else:
-            return False
-    elif inp[0] == tr:
-        return True
+        return inp[1] > c_on_t[1]
     else:
-        return False
+        return inp[0] == tr
 
 
 def end_move(current_table, current_used):
@@ -29,7 +24,7 @@ def give_cards(player_to_give, current_deck):
             break
 
 
-players = [Player(), Player()]
+players = [Player('# 1'), Player('# 1')]
 
 deck = CardDeck()
 deck.mix()

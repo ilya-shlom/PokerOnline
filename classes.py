@@ -39,7 +39,9 @@ class CardDeck:
 
 class Player:
 
-    def __init__(self):
+    def __init__(self, name):
+        # name of a player
+        self.name = name
         # num of cards in player's hand
         self.amount = 0
         # cards in player's hand
