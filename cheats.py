@@ -1,6 +1,7 @@
 from classes import *
 
 sure_deck = []
+rec_deck = []
 
 
 # us - used, h_d - hand_deck, tab - table
@@ -25,3 +26,8 @@ def sure_deck_build(tab):
             sure_deck.append(card)
 
 
+def recom_card(hand_deck, prob_deck):
+    for h_card in hand_deck:
+        for p_card in prob_deck:
+            if h_card[0] == p_card[0] and h_card[1] > p_card[1]:
+                rec_deck.append(h_card)
