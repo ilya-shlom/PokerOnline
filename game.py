@@ -91,7 +91,8 @@ while len(players[playing_now].hand_deck) > 0 and len(players[abs((playing_now -
             end_move()
             playing_now = (playing_now + 1) % len(players)
         elif chosen_card == "TAKE":
-            sure_deck_build(table)
+            if (playing_now + 1) % len(players):
+                sure_deck_build(table)
             get_from_table(players[(playing_now+1) % len(players)])
             print(players[(playing_now + 1) % len(players)].hand_deck)
             playing_now = (playing_now + 2) % len(players)
