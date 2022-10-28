@@ -44,7 +44,6 @@ def give_cards(player_to_give, current_deck):
         player_to_give.get_card(current_deck.get())
     player_to_give.hand_deck.sort()
 
-
 players = [Player('# 1'), Player('# 2')]
 
 deck = CardDeck()
@@ -65,8 +64,10 @@ while len(players[playing_now].hand_deck) > 0 and len(players[abs((playing_now -
     print(f'New Round: Player {playing_now + 1}')
     # 1st player
     print(players[playing_now].hand_deck)
-    print(f'Probably deck: {prob_deck_build(used, players[playing_now].hand_deck, tr_card)}')
+    prob_deck = prob_deck_build(used, players[playing_now].hand_deck, tr_card)
+    print(f'Probably deck: {prob_deck}')
     print(f'Sure deck: {sure_deck}')
+    print(f'Recommended to use: {recom_card(players[playing_now].hand_deck, prob_deck)}')
     chosen_card = None
     while not chosen_card:
         print("Choose card: ", end='')
