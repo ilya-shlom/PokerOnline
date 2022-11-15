@@ -44,6 +44,7 @@ def give_cards(player_to_give, current_deck):
         player_to_give.get_card(current_deck.get())
     player_to_give.hand_deck.sort()
 
+
 players = [Player('# 1'), Player('# 2')]
 
 deck = CardDeck()
@@ -60,52 +61,8 @@ playing_now = 0
 
 print("--------------- SHULER ONLINE ---------------")
 print(f'Trump is {tr_card}')
-while len(players[playing_now].hand_deck) > 0 and len(players[abs((playing_now - 1)) % len(players)].hand_deck) > 0:
-    print(f'New Round: Player {playing_now + 1}')
-    # 1st player
-    print(players[playing_now].hand_deck)
-    prob_deck = prob_deck_build(used, players[playing_now].hand_deck, tr_card)
-    print(f'Probably deck: {prob_deck}')
-    print(f'Sure deck: {sure_deck}')
-    print(f'Recommended to use: {recom_card(players[playing_now].hand_deck, prob_deck)}')
-    chosen_card = None
-    while not chosen_card:
-        print("Choose card: ", end='')
-        chosen_card = input()
-        if chosen_card in players[playing_now].hand_deck:
-            put_on_table(chosen_card, players[playing_now])
-            print(f"Table: {table}")
-        else:
-            print("Input Error! Choose another card.")
-            chosen_card = None
+while min([p.amount for p in players]) > 0:
 
-    # 2nd player
-    print(players[(playing_now + 1) % len(players)].hand_deck)
-    chosen_card = None
-    while not chosen_card:
-        print("Choose card from deck or take cards by TAKE: ", end='')
-        chosen_card = input()
-        if chosen_card in players[(playing_now + 1) % len(players)].hand_deck \
-                and check_card(table[len(table) - 1][0], chosen_card):
-            cover_card(table[len(table) - 1][0], chosen_card, players[(playing_now + 1) % len(players)])
-            print(f"Table: {table}")
-            end_move()
-            playing_now = (playing_now + 1) % len(players)
-        elif chosen_card == "TAKE":
-            if (playing_now + 1) % len(players):
-                sure_deck_build(table)
-            get_from_table(players[(playing_now + 1) % len(players)])
-            print(players[(playing_now + 1) % len(players)].hand_deck)
-            playing_now = (playing_now + 2) % len(players)
-        else:
-            print("Input Error! Choose another card.")
-            chosen_card = None
-
-    for i in range(len(players)):
-        give_cards(players[(playing_now + i) % len(players)], deck)
-
-    print(f'Used cards: {used}')
-    print()
 
 for i in range(len(players)):
     if len(players[i].hand_deck) == 0:
