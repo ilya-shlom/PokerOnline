@@ -5,8 +5,21 @@
 {% endblock %}
 
 {% block body %}
-<h1></h1>
-<button><a href="gamepage">ИГРА</a></button><br>
-<button><a href="signup">Регистрация</a></button>
-<button><a href="signin">Вход</a></button>
+<h1>ШУЛЕР ОНЛАЙН beta</h1>
+<div class="home" align="center">
+    <form action="gamepage" class="home">
+        <input type="submit" value="Играть" class="home"/>
+    </form>
+    <br>
+    <form action="gamepage" class="home">
+        <input type="submit" value="Статистика" class="home"/>
+    </form>
+    <br>
+    <form action="gamepage" class="home">
+        <input type="submit" value="Настройки" class="home"/>
+    </form>
+    <br>
+    <button><a href="signup">Регистрация</a></button>
+    <button><a href="signin">Вход</a></button>
+</div>
 {% endblock %}
