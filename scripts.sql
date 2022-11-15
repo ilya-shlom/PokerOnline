@@ -8,4 +8,5 @@ CREATE TABLE post{
     player_id INTEGER PRIMARY KEY,
     res VARCHAR(1),
     using_cheats VARCHAR(1),
+    щкщкщщкщк
 };
