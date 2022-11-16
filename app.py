@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, flash
 from flask_restful import Api, Resource, reqparse
-from db import get_db
+import db
 
 app = Flask(__name__)
 api = Api(app)
+db.init_app(app)
 
 
 @app.route('/')
@@ -37,7 +38,7 @@ def submit_acc():
         username = request.form['username']
         password = request.form['password']
 
-        db = get_db()
+        database = db.get_db()
         error = None
         if not username:
             error = 'Username is required.'
@@ -45,10 +46,10 @@ def submit_acc():
             error = 'Password is required.'
         if error is None:
             try:
-                db.execute("INSERT INTO users (username, password) VALUES (?, ?)",
-                           (username, password))
-                db.commit()
-            except db.IntegrityError:
+                database.execute("INSERT INTO users (username, password) VALUES (?, ?)",
+                                 (username, password))
+                database.commit()
+            except database.IntegrityError:
                 error = f"User {username} is already registered."
             else:
                 return render_template("index.html")
