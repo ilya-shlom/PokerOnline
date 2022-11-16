@@ -14,7 +14,6 @@ while min((player.in_game for player in lobby.current_players)):
             while player.amount != 6 and lobby.current_deck.amount:
                 player.get_card(lobby.current_deck.get())
 
-
     for player in lobby.current_players:
         print(f'{player.name} turn!\n')
 
@@ -22,24 +21,8 @@ while min((player.in_game for player in lobby.current_players)):
         for card in inp_cards:
             lobby.put_on_table(player, card)
 
-
-
-deck = CardDeck()
-deck.mix()
-tr = deck.trump[0]
-tr_card = deck.trump
-
-for p in players:
-    for i in range(6):
-        p.get_card(deck.get())
-    p.hand_deck.sort()
-
-playing_now = 0
-
 print("--------------- SHULER ONLINE ---------------")
-print(f'Trump is {tr_card}')
-
-
+print(f'Trump is shit')
 
 for i in range(len(players)):
     if len(players[i].hand_deck) == 0:
