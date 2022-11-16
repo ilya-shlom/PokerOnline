@@ -4,6 +4,8 @@ from cheats import *
 table = []
 used = []
 
+lobby = Lobby(max_lobby=6, lobby_id=1234, cheats_allowed=False)
+
 
 def put_on_table(c_name, pl):
     pl.put_card(c_name)
@@ -40,7 +42,7 @@ def end_move():
 
 
 def give_cards(player_to_give, current_deck):
-    while len(player_to_give.hand_deck) < 6 and len(current_deck.deck) > 0:
+    while len(player_to_give.hand_deck) < 6 and len(current_deck.cards) > 0:
         player_to_give.get_card(current_deck.get())
     player_to_give.hand_deck.sort()
 
@@ -61,7 +63,7 @@ playing_now = 0
 
 print("--------------- SHULER ONLINE ---------------")
 print(f'Trump is {tr_card}')
-while min([p.amount for p in players]) > 0:
+
 
 
 for i in range(len(players)):

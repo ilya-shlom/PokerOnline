@@ -1,0 +1,48 @@
+@font-face {
+    font-family: "NAMU-1990";
+    src: url("NAMU-1990.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: "NAMU-1910";
+    src: url("NAMU-1910.ttf") format("truetype");
+}
+
+body {
+    background: linear-gradient(180deg, #0B9922 -20.23%, #066616 117.55%) fixed;
+}
+
+h1 {
+    font-family: "NAMU-1910";
+    font-size: 50px;
+    text-align: center;
+    color: white;
+}
+
+form.home {
+    width: 352px;
+    height: 74px;
+
+
+    background: rgba(221, 221, 221, 0.5);
+    box-shadow: 0px 0px 41px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 50px;
+
+    margin: 5px;
+}
+
+input.home {
+    width: 352px;
+    height: 74px;
+
+    background: transparent;
+    border: none !important;
+
+    font-family: "NAMU-1990";
+    font-size: 30px;
+    color: white;
+}
+
+div.home {
+    margin-top: 200px;
+}

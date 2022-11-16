@@ -8,7 +8,7 @@ def prob_deck_build(us, h_d, tr, tab=None):
     if tab is None:
         tab = []
     deck = CardDeck()
-    prob_deck = deck.deck
+    prob_deck = deck.cards
     prob_deck.remove(tr)
     for card in h_d:
         prob_deck.remove(card)

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Регистрация
+{% endblock %}
+
+{% block body %}
+<h1 align=center>Регистрация</h1>
+<form action="submit_acc" method="post">
+<p>Логин<br>
+    <input required type="text" name="username"></p>
+
+<p>Пароль<br>
+    <input required type="password" name="password"></p>
+
+<p>Фотография<br>
+    <input type="file"></p>
+
+  <input type="submit" value="Зарегистрироваться">
+</form>
+
+{% endblock %}
