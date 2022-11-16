@@ -16,7 +16,7 @@ while min((player.in_game for player in lobby.current_players)):
 
 
     for player in lobby.current_players:
-        print(f'{player.name} turn!\n}')
+        print(f'{player.name} turn!\n')
 
         inp_cards = input().split()
         for card in inp_cards:
