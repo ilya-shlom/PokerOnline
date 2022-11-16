@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from flask_restful import Api, Resource, reqparse
 import db
 
@@ -57,6 +57,34 @@ def submit_acc():
     return render_template("signup.html")
 
 
+@app.route('/signin', methods=('GET', 'POST'))
+def signin():
+    return render_template("login.html")
+
+@app.route('/login', methods = ('GET', 'POST'))
+def login():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+        database = db.get_db()
+        error = None
+        user = database.execute('SELECT * FROM users WHERE username = ?', (username, )).fetchone()
+
+        if user is None:
+            error = 'Incorrect Username'
+        elif user['password'] is not password:
+            error = 'Incorrect Password'
+
+        if error is None:
+            session.clear()
+            session['user_id'] = user['id']
+            return render_template("index.html")
+
+        flash(error)
+
+    return render_template("index.html")
+
 if __name__ == "__main__":
+    app.secret_key = "very secret key"
     app.run(debug=True)
 
