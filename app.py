@@ -64,11 +64,10 @@ def submit_acc():
                 session.clear()
                 session['user_id'] = database.execute('SELECT * FROM users WHERE username = ?',
                                                       (username,)).fetchone()['id']
-                return render_template("index.html", out=f"Welcome to the game, {username}!")
             except database.IntegrityError:
                 error = f"User {username} is already registered."
             else:
-                return render_template("index.html")
+                return render_template("index.html", out=f"Welcome to the game, {username}!")
         flash(error)
     return render_template("signup.html", error=error)
 
