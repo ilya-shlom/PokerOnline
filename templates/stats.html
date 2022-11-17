@@ -6,7 +6,15 @@
 
 {% block body %}
 <h1>Статистика</h1>
-<form action="/" class="home">
-        <input type="submit" value="Назад" class="home"/>
-    </form>
+
+<div class="home" align="center">
+    <p>Игрок: {{out_user}}</p>
+    <p>Всего игр: {{out_g}}</p>
+    <p>Побед: {{out_w}}</p>
+    <p>Поражений: {{out_l}}</p>
+    <p>Игр с помощником: {{out_c}}</p>
+    <form action="/" class="home">
+            <input type="submit" value="Назад" class="home"/>
+        </form>
+</div>
 {% endblock %}

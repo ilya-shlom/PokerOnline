@@ -59,7 +59,30 @@ def gamepage():
 
 @app.route('/stats')
 def stats():
-    return render_template("stats.html")
+    log_state = 0
+    win = 0
+    lose = 0
+    cheat = 0
+    game = 0
+    user_id = session.get('user_id', default=None)
+    database = db.get_db()
+    if user_id:
+        log_state = 1
+        user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
+        res = database.execute("SELECT res, using_cheats FROM stats WHERE player_id = ?", (user_id,)).fetchall()
+        game, count = len(res), len(res) - 1
+        while count >= 0:
+            win += 1 if res[count][0] == 'w' else 0
+            lose += 1 if res[count][0] == 'l' else 0
+            cheat += 1 if res[count][1] == 'y' else 0
+            count -= 1
+
+
+
+    else:
+        user = "Not logged in"
+    return render_template("stats.html", out_user=str(user), out_g=str(game), out_w=str(win), out_l=str(lose), out_c=str(cheat),
+                           state=log_state)
 
 
 @app.route('/settings')
