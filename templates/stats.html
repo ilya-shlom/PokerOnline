@@ -6,15 +6,26 @@
 
 {% block body %}
 <h1>Статистика</h1>
-
-<div class="home" align="center">
-    <p>Игрок: {{out_user}}</p>
-    <p>Всего игр: {{out_g}}</p>
-    <p>Побед: {{out_w}}</p>
-    <p>Поражений: {{out_l}}</p>
-    <p>Игр с помощником: {{out_c}}</p>
-    <form action="/" class="home">
-            <input type="submit" value="Назад" class="home"/>
-        </form>
+<div class="stats" align="center">
+    <div class="stats-avatar">
+        <img class="avatar" src="../static/assets/default.png">
+    </div>
+    <p class="stats-avatar">{{out_user}}</p>
+    <p class="stat-type" align="left">Всего игр</p>
+    <p class="stat-val" align="right">{{out_g}}</p>
+    <hr class="stats">
+    <p class="stat-type" align="left">Побед</p>
+    <p class="stat-val" align="right">{{out_w}}</p>
+    <hr class="stats">
+    <p class="stat-type" align="left">Поражений</p>
+    <p class="stat-val" align="right">{{out_l}}</p>
+    <hr class="stats">
+    <p class="stat-type" align="left">Игр с помощником</p>
+    <p class="stat-val" align="right">{{out_c}}</p>
+    <br>
 </div>
+<br>
+<form action="/" class="home">
+    <input type="submit" value="Назад" class="home"/>
+</form>
 {% endblock %}

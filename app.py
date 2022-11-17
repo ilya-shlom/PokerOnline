@@ -47,7 +47,7 @@ def gamepage():
             except database.IntegrityError:
                 error = "some errors :_("
             else:
-                # здесь нужно поправить, т.к. не выводится юзер
+                # Здесь нужно поправить, т.к. не выводится юзер
                 return render_template("gamepage.html", out=str(user) + " win!")
 
     # здесь тоже не выводится
@@ -77,12 +77,10 @@ def stats():
             cheat += 1 if res[count][1] == 'y' else 0
             count -= 1
 
-
-
     else:
         user = "Not logged in"
-    return render_template("stats.html", out_user=str(user), out_g=str(game), out_w=str(win), out_l=str(lose), out_c=str(cheat),
-                           state=log_state)
+    return render_template("stats.html", out_user=str(user), out_g=str(game), out_w=str(win), out_l=str(lose),
+                           out_c=str(cheat), state=log_state)
 
 
 @app.route('/settings')
