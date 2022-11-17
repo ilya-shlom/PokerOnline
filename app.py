@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, flash, session, redirect, url_for, blueprints
+from flask import Flask, render_template, request, flash, session, redirect, url_for
 from flask_restful import Api, Resource, reqparse
 import db
 import os

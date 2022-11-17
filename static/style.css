@@ -1,11 +1,11 @@
 @font-face {
     font-family: "NAMU-1990";
-    src: url("NAMU-1990.ttf") format("truetype");
+    src: url("assets/NAMU-1990.ttf") format("truetype");
 }
 
 @font-face {
     font-family: "NAMU-1910";
-    src: url("NAMU-1910.ttf") format("truetype");
+    src: url("assets/NAMU-1910.ttf") format("truetype");
 }
 
 body {
