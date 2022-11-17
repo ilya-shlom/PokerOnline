@@ -8,6 +8,42 @@
     src: url("assets/NAMU-1910.ttf") format("truetype");
 }
 
+div.avatar {
+    position: absolute;
+    width: 45px;
+    height: 45px;
+    left: 13px;
+    top: 13px;
+
+    background: rgba(153, 153, 153, 0.6);
+    box-shadow: 0 4px 30px 5px rgba(0, 0, 0, 0.1);
+    border-radius: 70px;
+}
+
+img.avatar {
+    width: 45px;
+    height: 45px;
+    border-radius: 70px;
+}
+
+p.avatar {
+    position: absolute;
+    left: 70px;
+    top: 8px;
+
+    font-family: "NAMU-1990";
+    font-style: normal;
+    font-weight: 1100;
+    font-size: 27px;
+    line-height: 1px;
+    /* identical to box height */
+    display: flex;
+    align-items: center;
+
+    color: #FFFFFF;
+
+}
+
 body {
     background: linear-gradient(180deg, #0B9922 -20.23%, #066616 117.55%) fixed;
 }
