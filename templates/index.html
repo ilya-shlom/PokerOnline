@@ -23,12 +23,19 @@
     <form action="settings" class="home">
         <input type="submit" value="Настройки" class="home"/>
     </form>
-    <br>
+    <div style="margin-top:35px;">
     {% if state == 0 %}
-    <button><a href="signup">Регистрация</a></button>
-    <button><a href="signin">Вход</a></button>
+        <img src="../static/assets/shulerid.png" style="height:40px;float:left;margin-right:auto;margin-left:41%;">
+        <div style="float:right;margin-right:41%;margin-left:auto;margin-top:10px;">
+    <form action="signup" class="home-log" style="width:80px;float:left;"><input type="submit" value="Регистрация" class="home-log" style="width:80px;"/></form>
+    <form action="signin" class="home-log" style="float:right;margin-left:5px;"><input type="submit" value="Вход" class="home-log"/></form>
+            </div>
     {% else %}
-    <button><a href="logout">Выход</a></button>
+        <img src="../static/assets/shulerid.png" style="height:40px;float:left;margin-right:auto;margin-left:43%;">
+        <div style="float:right;margin-right:43%;margin-left:auto;margin-top:10px;">
+    <form action="logout" class="home-log"><input type="submit" value="Выход" class="home-log" "/></form>
+        </div>
     {% endif %}
+    </div>
 </div>
 {% endblock %}

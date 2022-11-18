@@ -6,15 +6,21 @@
 
 {% block body %}
 <h1 align=center>Вход</h1>
-<p>{{error}}</p>
-<form action="login" method="post">
-<p>Логин<br>
-    <input required type="text" name="username"></p>
+<div class=login align="center">
+    <img src="../static/assets/shulerid.png" style="height:60px;margin-top:20px;margin-bottom:20px;">
+    <form action="login" method="post">
+        <p>Логин<br>
+            <input required type="text" name="username" class="account"></p>
 
-<p>Пароль<br>
-    <input required type="password" name="password"></p>
+        <p>Пароль<br>
+            <input required type="password" name="password" class="account"></p>
+        {%if error%}
+            <p class="signup" style="margin-top:10px;margin-left:25%;font-size: 16px;">
+                <img src="../static/assets/error.png" class="signup" style="width:17px;height:17px;">{{error}}</p>
+            {%endif%}
 
-  <input type="submit" value="Войти">
-</form>
+        <input type="submit" value="Войти" class="home" style="margin-top:30px;width:200px;">
+    </form>
+</div>
 
 {% endblock %}

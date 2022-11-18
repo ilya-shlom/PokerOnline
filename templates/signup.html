@@ -6,18 +6,38 @@
 
 {% block body %}
 <h1 align=center>Регистрация</h1>
-<p>{{error}}</p>
-<form action="submit_acc" method="post">
-<p>Логин<br>
-    <input required type="text" name="username"></p>
+<div class=signup align="center">
+    <img src="../static/assets/shulerid.png" style="height:60px;margin-top:20px;">
+    <p class="signup" style="font-weight: 1000;">Создайте аккаунт Shuler ID, чтобы:</p>
+    <p class="signup"><img src="../static/assets/play.png" class="signup">Сыграть в легендарную игру с людьми со всего
+        мира</p>
+    <p class="signup"><img src="../static/assets/stats.png" class="signup">Отследить статистику своих успехов</p>
+    <p class="signup"><img src="../static/assets/lamp.png" class="signup">Воспользоваться ИСППР и получить подсказки в
+        ходе игры</p>
+    <form action="submit_acc" method="post" class="signup">
+        <div style="float:left;width:40%;margin-left:60px;margin-right:auto;margin-top:20px;">
+            <p>Логин<br>
+                <input required type="text" name="username" class="account"></p>
 
-<p>Пароль<br>
-    <input required type="password" name="password"></p>
-
-<p>Фотография<br>
-    <input type="file"></p>
-
-  <input type="submit" value="Зарегистрироваться">
-</form>
-
+            <p>Пароль<br>
+                <input required type="password" name="password" class="account"></p>
+            {%if error%}
+            <p class="signup" style="margin-top:10px;font-size: 16px;">
+                <img src="../static/assets/error.png" class="signup" style="width:17px;height:17px;">{{error}}</p>
+            {%endif%}
+        </div>
+        <div style="float:right;width:40%;margin-left:auto;margin-right:60px;margin-top: 20px;">
+            <p>Фотография<br></p>
+            <div class="signup-photo">
+                <input type="file" class="signup-photo"/>
+                <div class="signup-photo-img">
+                    <img src="../static/assets/upload.png" class="signup-photo-img"
+                         style="width:50px;height:50px;margin-top: 25px;">
+                </div>
+            </div>
+        </div>
+        <input type="submit" value="Зарегистрироваться" class="home"
+               style="position:relative;margin-top:30px;right:25%">
+    </form>
+</div>
 {% endblock %}

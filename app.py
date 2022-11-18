@@ -20,7 +20,7 @@ def index():
         user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
 
     else:
-        user = "Not logged in"
+        user = "Вход не выполнен"
     return render_template("index.html", out=str(user), state=log_state)
 
 
@@ -114,9 +114,9 @@ def submit_acc():
                 session['user_id'] = database.execute('SELECT * FROM users WHERE username = ?',
                                                       (username,)).fetchone()['id']
             except database.IntegrityError:
-                error = f"User {username} is already registered."
+                error = f"Пользователь {username} уже существует"
             else:
-                return render_template("index.html", out=f"Welcome to the game, {username}!")
+                return render_template("index.html", out=f"Добро пожаловать, {username}!")
         flash(error)
     return render_template("signup.html", error=error)
 
@@ -136,14 +136,14 @@ def login():
         user = database.execute('SELECT * FROM users WHERE username = ?', (username, )).fetchone()
 
         if user is None:
-            error = 'Incorrect Username'
+            error = 'Неверный логин'
         elif user['password'] != password:
-            error = 'Incorrect Password'
+            error = 'Неверный пароль'
 
         if error is None:
             session.clear()
             session['user_id'] = user['id']
-            return render_template("index.html", out=f"Welcome back, {username}!")
+            return render_template("index.html", out=f"С возвращением, {username}!")
 
         flash(error)
 
@@ -157,5 +157,5 @@ def logout():
 
 
 if __name__ == "__main__":
-    app.secret_key = os.urandom(30).hex()
-    app.run(debug=True)
+    app.secret_key = os.urandom(30).hex() # Генерация секретного ключа для сессии пользователя
+    app.run(debug=True, host='0.0.0.0')
