@@ -2,20 +2,18 @@ from classes import *
 from cheats import *
 
 lobby = Lobby(max_lobby=6, lobby_id=1234, cheats_allowed=False)
-players = [Player('# 1'), Player('# 2')]
+players = [Player('# 1'), Player('# 2'), Player('# 3'), Player('# 4'), Player('# 5')]
 lobby.add_players(*players)
 
 lobby.start_new_game()
 
 while min((player.in_game for player in lobby.current_players)):
 
-    if lobby.current_deck.amount:
-        for player in lobby.current_players:
-            while player.amount != 6 and lobby.current_deck.amount:
-                player.get_card(lobby.current_deck.get())
+    lobby.give_cards()
 
     for player in lobby.current_players:
-        print(f'{player.name} turn!\n')
+        print(f'{player.name} turn!')
+        print(f'{player.hand_deck}')
 
         inp_cards = input().split()
         for card in inp_cards:

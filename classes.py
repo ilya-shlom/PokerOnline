@@ -105,6 +105,13 @@ class Lobby:
             self.used.append(c_card)
             self.used.append(t_card)
 
+    def give_cards(self, s_ind=0):
+        for ind in range(len(self.current_players)):
+            f_ind = s_ind + ind
+            if f_ind > len(self.current_players):
+                f_ind -= len(self.current_players)
+            while self.current_deck and self.current_players[f_ind].amount != 6:
+                self.current_players[f_ind].get_card(self.current_deck.get())
 
 
 
