@@ -1,9 +1,15 @@
-from flask import Flask, render_template, request, flash, session, redirect, url_for
+from flask import Flask, render_template, request, flash, session, redirect, url_for, send_file
 from flask_restful import Api, Resource, reqparse
 import subprocess
 import db
 import os
+import logging
 
+level = logging.DEBUG
+logger = logging.getLogger()
+logger.setLevel(level)
+for handler in logger.handlers:
+    handler.setLevel(level)
 app = Flask(__name__)
 api = Api(app)
 db.init_app(app)
@@ -27,36 +33,47 @@ def index():
 
 @app.route('/gamepage', methods=('GET', 'POST'))
 def gamepage():
-    # log_state = 0
-    # user_id = session.get('user_id', default=None)
-    # database = db.get_db()
-    # if user_id:
-    #     log_state = 1
-    #     user = user_id
-    #     print(user)
-    #     user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
-    #
-    #     if request.method == 'POST':
-    #         win = request.form.get("win", False)
-    #         lose = request.form.get("lose", False)
-    #         database = db.get_db()
-    #         val = 'w' if win is not False else 'l'
-    #         try:
-    #             database.execute("INSERT INTO stats (player_id, res, using_cheats) VALUES (?, ?, ?)",
-    #                              (user_id, val, 'n'))
-    #             database.commit()
-    #         except database.IntegrityError:
-    #             error = "some errors :_("
-    #         else:
-    #             # Здесь нужно поправить, т.к. не выводится юзер
-    #             return render_template("gamepage.html", out=str(user) + " win!")
-    #
-    # # здесь тоже не выводится
-    # else:
-    #     user = "Not logged in"
-    # # и здесь
-    # return render_template("gamepage.html", out=str(user), state=log_state)
-    exec(open('client.py').read())
+    log_state = 0
+    user_id = session.get('user_id', default=None)
+    database = db.get_db()
+    if user_id:
+        log_state = 1
+        user = user_id
+        print(user)
+        user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
+
+        if request.method == 'POST':
+            win = request.form.get("win", False)
+            lose = request.form.get("lose", False)
+            database = db.get_db()
+            val = 'w' if win is not False else 'l'
+            try:
+                database.execute("INSERT INTO stats (player_id, res, using_cheats) VALUES (?, ?, ?)",
+                                 (user_id, val, 'n'))
+                database.commit()
+            except database.IntegrityError:
+                error = "some errors :_("
+            else:
+                # Здесь нужно поправить, т.к. не выводится юзер
+                return render_template("gamepage.html", out=str(user) + " win!")
+
+    # здесь тоже не выводится
+    else:
+        user = "Not logged in"
+    # и здесь
+    return render_template("gamepage.html", out=str(user), state=log_state)
+
+
+@app.route('/download_win')
+def download_win():
+    path = "client.py"
+    return send_file(path, as_attachment=True)
+
+
+@app.route('/download_macos')
+def download_macos():
+    path = "client.py"
+    return send_file(path, as_attachment=True)
 
 
 @app.route('/stats')

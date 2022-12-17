@@ -119,7 +119,7 @@ class Lobby:
 class MyApp(App):
 
     def build(self):
-        label = Label(text="МАТЬ ЕБАЛ ЭТОЙ ХУЙНИ!")
+        label = Label(text="дурак онлайн")
 
         return label
 

@@ -17,15 +17,15 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
     addr = ('localhost', 8888)
     sock.connect(addr)
     MyApp().run()
-    while True:
-        try:
-            com = input()
-            if com:
-                sock.sendto(com.encode(), addr)
-                msg = sock.recv(1024)
-                msg = msg.decode()
-                print(msg)
-            else:
-                print("No input!")
-        except KeyboardInterrupt:
-            break
+    # while True:
+    #     try:
+    #         com = input()
+    #         if com:
+    #             sock.sendto(com.encode(), addr)
+    #             msg = sock.recv(1024)
+    #             msg = msg.decode()
+    #             print(msg)
+    #         else:
+    #             print("No input!")
+    #     except KeyboardInterrupt:
+    #         break
