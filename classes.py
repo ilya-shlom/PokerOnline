@@ -1,8 +1,6 @@
 # This is the beginning of ShulerOnline project
 
 import random
-from kivy.app import App
-from kivy.uix.label import Label
 
 
 class CardDeck:
@@ -114,14 +112,6 @@ class Lobby:
                 f_ind -= len(self.current_players)
             while self.current_deck and self.current_players[f_ind].amount != 6:
                 self.current_players[f_ind].get_card(self.current_deck.get())
-
-
-class MyApp(App):
-
-    def build(self):
-        label = Label(text="дурак онлайн")
-
-        return label
 
 
 

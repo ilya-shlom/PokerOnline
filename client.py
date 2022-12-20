@@ -1,31 +1,48 @@
 import os
 import socket
 from kivy.config import Config
-from classes import MyApp
-
-x = os.environ.get('x', 50)
-y = os.environ.get('y', 50)
-Config.set('graphics', 'position', 'custom')
-Config.set('graphics', 'left', x)
-Config.set('graphics', 'top', y)
-Config.set('graphics', 'width', '480')
-Config.set('graphics', 'height', '640')
-Config.set('graphics', 'resizable', False)
+from kivy.app import App
+from kivy.uix.widget import Widget
+from kivy.lang import Builder
+from kivy.core.window import Window
 
 
-with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
-    addr = ('localhost', 8888)
-    sock.connect(addr)
+Builder.load_file('bg.kv')
+Config.set('graphics', 'resizable', 0)
+
+Window.size = (1280, 720)
+
+
+class MyLayout(Widget):
+    pass
+
+
+class MyApp(App):
+    def build(self):
+        return MyLayout()
+
+
+# with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
+#     addr = ('localhost', 8888)
+#     sock.connect(addr)
+#     MyApp().run()
+#     while True:
+#         try:
+#             com = input()
+#             if com:
+#                 sock.sendto(com.encode(), addr)
+#                 msg = sock.recv(1024)
+#                 msg = msg.decode()
+#                 print(msg)
+#             else:
+#                 print("No input!")
+#         except KeyboardInterrupt:
+#             break
+if __name__ == '__main__':
     MyApp().run()
-    # while True:
-    #     try:
-    #         com = input()
-    #         if com:
-    #             sock.sendto(com.encode(), addr)
-    #             msg = sock.recv(1024)
-    #             msg = msg.decode()
-    #             print(msg)
-    #         else:
-    #             print("No input!")
-    #     except KeyboardInterrupt:
-    #         break
+            # Scatter:
+            #     scale: 2
+            #     add_widget: image
+            #     Image:
+            #         id: image
+            #         source: 'images/deck.png'

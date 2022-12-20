@@ -1,0 +1,55 @@
+<MyLayout>
+    canvas.before:
+        Rectangle:
+            source: 'images/background.png'
+            pos: self.pos
+            size: self.size
+
+    FloatLayout:
+        size: root.width, root.height
+
+        Image:
+            source: 'images/PlayerIMG.png'
+            # {'x', 'y', 'top', 'bottom', 'left', 'right'}
+            pos_hint: {'top': 1, 'right': 1}
+            size_hint: (0.18, 0.18)
+
+        Label:
+            text: 'Kolpakov_A_S'
+            pos_hint: {'y': 0.77, 'right': 1}
+            size_hint: (0.18, 0.18)
+
+        Image:
+            source: 'images/PlayerIMG.png'
+            # {'x', 'y', 'top', 'bottom', 'left', 'right'}
+            pos_hint: {'y': 0.05, 'left': 1}
+            size_hint: (0.18, 0.18)
+
+        Label:
+            text: 'Антон'
+            pos_hint: {'bottom': 1, 'left': 1}
+            size_hint: (0.18, 0.18)
+
+        Image:
+            source: 'images/drawn.png'
+            pos_hint: {'y': 0.4, 'right': 1}
+            size_hint: (0.3, 0.3)
+
+        Image:
+            source: 'images/deck.png'
+            pos_hint: {'y': 0.4, 'left': 1}
+            size_hint: (0.27, 0.27)
+
+
+    BoxLayout:
+        orientation: 'horizontal'
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 6
+            rows: 1
+
+
+
+
+

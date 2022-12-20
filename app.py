@@ -75,7 +75,6 @@ def download_macos():
     path = "client.py"
     return send_file(path, as_attachment=True)
 
-
 @app.route('/stats')
 def stats():
     log_state = 0
