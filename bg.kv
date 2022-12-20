@@ -38,9 +38,24 @@
             size_hint: (0.3, 0.3)
 
         Image:
+            id: trump
+            source: 'images/deck.png'
+            pos_hint: {'y': 0.4, 'x': 0.03}
+            size_hint: (0.27, 0.27)
+            canvas.before:
+                PushMatrix
+                Rotate:
+                    angle: 270
+                    origin: self.center
+            canvas.after:
+                PopMatrix
+
+        Image:
             source: 'images/deck.png'
             pos_hint: {'y': 0.4, 'left': 1}
             size_hint: (0.27, 0.27)
+
+
 
 
     BoxLayout:

@@ -1,5 +1,9 @@
 import os
 import socket
+from time import sleep
+
+from kivy.clock import mainthread
+from classes import *
 from kivy.config import Config
 from kivy.app import App
 from kivy.uix.widget import Widget
@@ -8,7 +12,7 @@ from kivy.core.text import LabelBase
 
 
 Builder.load_file('bg.kv')
-
+LabelBase.register(name='NAMU-1990', fn_regular='static/assets/NAMU-1990.ttf')
 
 Config.set('graphics', 'resizable', 0)
 Config.set('graphics', 'width', 1280)
@@ -16,15 +20,27 @@ Config.set('graphics', 'height', 720)
 
 
 class MyLayout(Widget):
-    pass
+    def update_trump(self, card: str):
+        self.ids.trump.source = f'images/cards/{card}.png'
 
 
 class MyApp(App):
+
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.lobby = Lobby(2, 123, False)
+        self.lobby.start_new_game()
+        self.layout = MyLayout()
+
     def build(self):
-        return MyLayout()
+        return self.layout
 
+    def on_start(self):
+        self.layout.update_trump(self.lobby.current_deck.trump)
 
-LabelBase.register(name='NAMU-1990', fn_regular='static/assets/NAMU-1990.ttf')
+    @mainthread
+    def update(self):
+        print("Что делать...")
 
 
 # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
@@ -45,9 +61,3 @@ LabelBase.register(name='NAMU-1990', fn_regular='static/assets/NAMU-1990.ttf')
 #             break
 if __name__ == '__main__':
     MyApp().run()
-            # Scatter:
-            #     scale: 2
-            #     add_widget: image
-            #     Image:
-            #         id: image
-            #         source: 'images/deck.png'
