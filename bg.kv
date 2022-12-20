@@ -63,13 +63,19 @@
         size: root.width, root.height
 
         Button:
+            scale: 2
             text: "card"
+            pos_hint: {'y': 0.4, 'left': 1}
             font_size: 32
             id: scatter
-            size_hint: (.176, .274)
+            size_hint: (.1, .267)
             Image:
                 id: image
-                size_hint: (176, 274)
+                size_hint_x: None
+                size_hint_y: None
+
+                height: dp(156) # 274
+                width: dp(100) # 176
                 source: 'images/cards/C8.png'
                 center_x: self.parent.center_x
                 center_y: self.parent.center_y
