@@ -62,16 +62,22 @@
         orientation: 'horizontal'
         size: root.width, root.height
 
+        Button:
+            text: "card"
+            font_size: 32
+            id: scatter
+            size_hint: (.176, .274)
+            Image:
+                id: image
+                size_hint: (176, 274)
+                source: 'images/cards/C8.png'
+                center_x: self.parent.center_x
+                center_y: self.parent.center_y
+
+
         GridLayout:
             cols: 6
             rows: 1
-
-        Scatter:
-            scale: 1.95
-            add_widget: image
-            Image:
-                id: image
-                source: 'images/deck.png'
 
 
 
