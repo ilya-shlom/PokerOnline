@@ -5,6 +5,7 @@ from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
 from kivy.core.window import Window
+from kivy.core.text import LabelBase
 
 
 Builder.load_file('bg.kv')
@@ -20,6 +21,9 @@ class MyLayout(Widget):
 class MyApp(App):
     def build(self):
         return MyLayout()
+
+
+LabelBase.register(name='NAMU-1990', fn_regular='static/assets/NAMU-1990.ttf')
 
 
 # with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as sock:
