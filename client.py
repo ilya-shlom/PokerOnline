@@ -4,14 +4,15 @@ from kivy.config import Config
 from kivy.app import App
 from kivy.uix.widget import Widget
 from kivy.lang import Builder
-from kivy.core.window import Window
 from kivy.core.text import LabelBase
 
 
 Builder.load_file('bg.kv')
-Config.set('graphics', 'resizable', 0)
 
-Window.size = (1280, 720)
+
+Config.set('graphics', 'resizable', 0)
+Config.set('graphics', 'width', 1280)
+Config.set('graphics', 'height', 720)
 
 
 class MyLayout(Widget):
