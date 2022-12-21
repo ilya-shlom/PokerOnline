@@ -18,7 +18,7 @@ class GameLayout:
         """
         r = 0.9 * self.width
         cx = self.width * 0.5
-        cy = -0.8 * r if is_my else self.height + 0.8 * r
+        cy = -1 * r if is_my else self.height + 1 * r
 
         d_ang = 10
         max_ang = min(30, d_ang * n / 2)
@@ -27,21 +27,21 @@ class GameLayout:
         ang = min_ang + (max_ang - min_ang) / (n + 1) * (i + 1)
         ang_r = ang / 180 * pi
         m = 1 if is_my else -1
-        return cx + r * sin(ang_r), cy + m * r * cos(ang_r), -m * ang
+        return cx + r * sin(ang_r), cy + m * r, 0
 
     def pos_of_trump(self):
         """
         Положение козыря
         :return: x, y, поворот
         """
-        return self.width * 0.83, self.height / 2, 90
+        return self.width - self.width * 0.83, self.height / 2, -45
 
     def pos_of_deck(self):
         """
         Положение колоды
         :return: x, y, поворот
         """
-        return self.width * 0.93, self.height / 2, 0
+        return self.width - self.width * 0.93, self.height / 2, 0
 
     def pos_of_field_cell(self, i, n, beneath):
         """

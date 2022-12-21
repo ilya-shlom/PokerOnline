@@ -3,16 +3,16 @@ import random
 # масти
 from enum import Enum
 
-SPADES = '♠'
-HEARTS = '♥'
-DIAMS = '♦'
-CLUBS = '♣'
+SPADES = 'S'
+HEARTS = 'H'
+DIAMS = 'D'
+CLUBS = 'C'
 SUITS = [SPADES, HEARTS, DIAMS, CLUBS]
 
 # достоинтсва карт
-ACE = 'A'
-NOMINALS = ['6', '7', '8', '9', '10', 'J', 'Q', 'K', ACE]
-NOMINALS_SHORT = ['J', 'Q', 'K', ACE]
+ACE = 'E'
+NOMINALS = ['6', '7', '8', '9', 'A', 'B', 'C', 'D', ACE]
+NOMINALS_SHORT = ['B', 'C', 'D', ACE]
 
 # поиск индекса по достоинству
 NAME_TO_VALUE = {n: i for i, n in enumerate(NOMINALS)}
