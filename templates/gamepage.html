@@ -6,7 +6,6 @@
 
 {% block body %}
 <h1>Игра</h1>
-<p>{{out}}</p>
 <div class="download" align="center">
         <p>Для того, чтобы сыграть, установите приложение:</p>
         <form action="/download_win" class="home">
@@ -15,11 +14,12 @@
         <form action="/download_macos" class="home">
                 <input type="submit" value="MacOS" class="home"/>
         </form>
-        <p>Уже установили? Заходите в игру!</p>
-        <form action="../client.py" class="home">
-                <input type="submit" value="Играть" class="home"/>
+        <p>Уже установили? Копируйте свой код и вставляйте в игре!</p>
+        <form onclick="clip_div('pa')" class="home">
+                <input type="submit" value="Получить код" class="home"/>
         </form>
-        <form action="/" class="home" style="margin-top:10%;">
+        <div id = "pa" style="opacity: 0">{{out}}</div>
+        <form action="/" class="home" style="margin-top:8%;">
                 <input type="submit" value="Назад" class="home"/>
         </form>
 </div>

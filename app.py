@@ -43,12 +43,14 @@ def gamepage():
         print(user)
         user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
         game_key = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['game_key']
+        return render_template("gamepage.html", out=str(game_key), state=log_state)
 
     # здесь тоже не выводится
     else:
         user = "Not logged in"
+        return render_template("login.html")
     # и здесь
-    return render_template("gamepage.html", out=str(user) + " " + str(game_key), state=log_state)
+
 
 
 @app.route('/download_win')
