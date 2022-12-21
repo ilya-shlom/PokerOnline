@@ -6,26 +6,19 @@ from threading import Timer
 
 class DurakNetGame:
     def __init__(self, my_id, remote_id, remote_addr, ports):
-        self.state = DurakSerialized()  # геймплей
+        self.state = DurakSerialized()
 
         self._my_id = int(my_id)
         self._remote_id = int(remote_id)
         self._remote_addr = remote_addr
 
-        # проверка на адекватность ID
-        assert self._my_id != 0 and self._remote_id != 0 and self._my_id != self._remote_id
-
-        # кто ходит первый выбираем просто сравнивая ID (они же случайные)!
         me_first = self._my_id < self._remote_id
-        # мой индекс 0 если я первый, и 1 иначе. у соперника наоборот
         self._my_index = 0 if me_first else 1
         self._opp_index = 1 if me_first else 0
 
-        # две сетевых примочки на разны портах
         network1 = Networking(port_no=ports[0])
         network2 = Networking(port_no=ports[1])
 
-        # кто слушает какой порт выбираем также на базе сравнения ID как чисел
         self._receiver = network1 if me_first else network2
         self._receiver.bind("")
 
@@ -50,7 +43,7 @@ class DurakNetGame:
         g = self.state
         if g.field:
             if self.is_my_turn and g.any_unbeaten_cards:
-                return TurnFinishResult.CANT_FORCE_TO_TAKE  # print('Не можете вынудить соперника взять карты!')
+                return TurnFinishResult.CANT_FORCE_TO_TAKE
             elif not self.is_my_turn and not g.any_unbeaten_cards:
                 return TurnFinishResult.CANT_TAKE_NOW
             else:
@@ -71,7 +64,6 @@ class DurakNetGame:
         assert not self.is_my_turn
         g = self.state
         if g.field:
-            # если передали номер карты на поле, то преобразуем его в саму карту
             if isinstance(field_card, int):
                 field_card = list(g.field.keys())[field_card]
 
@@ -82,29 +74,23 @@ class DurakNetGame:
                 self._send_game_state()
             return result
         else:
-            return False  # 'Пока нечего отбивать!'
+            return False
 
     def _new_game(self):
-        # игрок с индексом 0 создает игру!
         self.state = DurakSerialized()
-
-        # и отсылает ее сопернику через небольшой промежуток времени, чтобы тот успел начать слушать
         Timer(0.5, self._send_game_state).start()
 
     def _on_remote_message(self, data):
         action = data['action']
         if action == 'state':
-            self.state = DurakSerialized(data['state'])  # обновить остояние
-            self.on_state_updated(self.state)  # 'Пришел ход от соперника!'
+            self.state = DurakSerialized(data['state'])
+            self.on_state_updated(self.state)
         elif action == 'quit':
-            self.on_opponent_quit()  # 'Соперник вышел!'
+            self.on_opponent_quit()
 
     def start(self):
-        # поток слушающий сообщений от другого игрока
         self._receiver.run_reader_thread(self._on_remote_message)
-
         if self._my_index == 0:
-            # игрок с индексом 0 создает игру!
             self._new_game()
 
     def stop(self):
