@@ -196,6 +196,9 @@ class GameLayout:
         self.card2widget = {}
         self.field.clear()
 
+    def update_image(self):
+        self.root.ids.image.opacity = 1
+
     def __init__(self, width, height, root: Widget, press_handler):
         self.width = width
         self.height = height
