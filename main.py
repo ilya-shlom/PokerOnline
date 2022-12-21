@@ -142,7 +142,7 @@ class DurakFloatApp(App):
         # синхорнизировать состояние игры и GUI
         if not self.game_init:
             self.game_init = True
-            self.layout.update_image()
+            self.layout.get_players('images/PlayerIMG.png', 'images/PlayerIMG.png', 'p_1', 'p_2')
             self.layout.make_cards(self.game.my_cards, self.game.opp_cards, self.game.state.trump, self.game.state.deck)
 
         if self.game.winner is not None:
