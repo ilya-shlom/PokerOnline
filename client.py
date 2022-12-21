@@ -7,6 +7,7 @@ from classes import *
 from kivy.config import Config
 from kivy.app import App
 from kivy.uix.widget import Widget
+from kivy.uix.button import Button
 from kivy.lang import Builder
 from kivy.core.text import LabelBase
 
@@ -24,6 +25,8 @@ class MyLayout(Widget):
         self.ids.trump.source = f'images/cards/{card}.png'
 
 
+
+
 class MyApp(App):
 
     def __init__(self, **kwargs):
@@ -33,6 +36,7 @@ class MyApp(App):
         self.layout = MyLayout()
 
     def build(self):
+        self.layout.add_widget(Card)
         return self.layout
 
     def on_start(self):
