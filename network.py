@@ -9,11 +9,9 @@ class Networking:
     BUFFER_SIZE = 4096  # размер буфера для примем сообщений
     TIME_OUT = 1.0  # время таймаута при ожидании данных в сокет
 
-
     def __init__(self, port_no, broadcast=False):
         self.port_no = port_no
         self._socket = self.get_socket(broadcast=broadcast)
-
 
     def get_socket(cls, broadcast=False, timeout=TIME_OUT): # <- создание Сокета
         sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
@@ -26,14 +24,11 @@ class Networking:
         sock.settimeout(timeout)
         return sock
 
-
     def bind(self, to=""): # <- получаем сообщения из определённого порта
         self._socket.bind((to, self.port_no))
 
-
     def run_reader_thread(self, callback): # <- поток для данных из сокета
         self.read_running = True
-
 
         def reader_job():
             while self.read_running:
@@ -41,12 +36,9 @@ class Networking:
                 if data:
                     callback(data)
 
-
-
         thread = threading.Thread(target=reader_job, daemon=True)
         thread.start()
         return thread
-
 
     def recv_json(self): # <- получение json файла
         try:
@@ -56,7 +48,6 @@ class Networking:
             pass
         return None, None
 
-
     def recv_json_until(self, predicate, timeout): # <- получение json в течение timeout секунд
         t0 = time.monotonic()
         while time.monotonic() < t0 + timeout:
@@ -65,15 +56,12 @@ class Networking:
                 return data, addr
         return None, None
 
-
     def send_json(self, j, to): # <- отправить json определённым личностям
         data = bytes(json.dumps(j), 'utf-8')
         return self._socket.sendto(data, (to, self.port_no))
 
-
     def send_json_broadcast(self, j): # <- отправить json всем
         return self.send_json(j, "<broadcast>")
-
 
     def __del__(self):
         logging.info('Closing socket')

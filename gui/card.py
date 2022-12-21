@@ -20,11 +20,12 @@ class Card(Button):
             # это колода. текст = кол-во карт
             self.text = str(int(self.counter))
             self.background_normal = 'images/deck.png'
-            self.color = (1, 1, 1, 1)
+            self.background_down = 'images/deck.png'
+            # self.color = (1, 1, 1, 1)
         elif not self.opened:
             # карта закрыта (рука соперника)
             self.background_normal = 'images/back.png'
-            self.background_normal = 'images/back.png'
+            self.background_down = 'images/back.png'
             # self.color = (0, 0.5, 0, 1)
         else:
             # карта открыта
@@ -35,7 +36,7 @@ class Card(Button):
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
-        self.target_position = (100, 100)
+        # self.target_position = (100, 100)
         self.target_rotation = 0
         self.bind(counter=self.update_text)
         self.bind(opened=self.update_text)

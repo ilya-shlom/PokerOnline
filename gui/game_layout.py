@@ -16,7 +16,7 @@ class GameLayout:
         :param is_my: True в моей руке (по дуге снизу), False в руке соперника (по дуге сверху) 
         :return: x, y, поровот
         """
-        r = 0.9 * self.width
+        r = 0.6 * self.width
         cx = self.width * 0.5
         cy = -1 * r if is_my else self.height + 1 * r
 
@@ -34,7 +34,7 @@ class GameLayout:
         Положение козыря
         :return: x, y, поворот
         """
-        return self.width - self.width * 0.83, self.height / 2, -45
+        return self.width - self.width * 0.84, self.height / 2, -45
 
     def pos_of_deck(self):
         """
@@ -53,13 +53,13 @@ class GameLayout:
         """"""
         """
         x_step = self.width * 0.15
-        x_start = self.width * 0.12
+        x_start = self.width * 0.3
         width = x_start + x_step * n
         if width >= self.width * 0.8:
             x_step = (self.width * 0.8 - x_start) / (n + 1)
-        ang = -10.0 if beneath else 10.0
-        x = x_start + i * x_step
-        y = self.height * 0.5 + (-0.04 if beneath else 0.04) * self.height
+        ang = 0
+        x = x_start + i * x_step if beneath else x_start + i * x_step + self.width * 0.03
+        y = self.height * 0.5 + 0.04 * self.height
         return x, y, ang
 
     def make_card(self, card, attrs=(0, 0, 0), opened=True):
@@ -184,8 +184,9 @@ class GameLayout:
 
     def throw_away_card(self, wcard: Card):
         if wcard is not None:
-            wcard.set_animated_targets(-self.width, self.height * 0.5, 0)
-            self.destory_card(wcard)
+            wcard.set_animated_targets(self.width * 0.9, self.height * 0.5, 360)
+            wcard.background_normal = 'images/drawn.png'
+            wcard.background_down = 'images/drawn.png'
 
     def remove_all_cards_animated(self):
         for wcard in list(self.card2widget.values()):
