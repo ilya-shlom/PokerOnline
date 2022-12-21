@@ -52,6 +52,32 @@
       size: self.size
       source: './images/background.png'
 
+  Image:
+    id: img_2
+    source: ''
+    pos_hint: {'top': 1, 'right': 1}
+    size_hint: (0.18, 0.18)
+    opacity: 0
+  Label:
+    font_name: 'static/assets/NAMU-1990.ttf'
+    id: player_2
+    text:
+    pos_hint: {'y': 0.77, 'right': 1}
+    size_hint: (0.18, 0.18)
+
+  Image:
+    id: img_1
+    source: ''
+    pos_hint: {'y': 0.05, 'left': 1}
+    size_hint: (0.18, 0.18)
+    opacity: 0
+  Label:
+    font_name: 'static/assets/NAMU-1990.ttf'
+    id: player_1
+    text:
+    pos_hint: {'bottom': 1, 'left': 1}
+    size_hint: (0.18, 0.18)
+
   GameMessageLabel:
     id: game_label
     pos: 0, self.width * 0.26

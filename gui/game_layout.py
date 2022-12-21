@@ -196,6 +196,14 @@ class GameLayout:
         self.card2widget = {}
         self.field.clear()
 
+    def get_players(self, image_1, image_2, nick_1, nick_2):
+        self.root.ids.player_1.text = nick_1
+        self.root.ids.player_2.text = nick_2
+        self.root.ids.img_1.opacity = 1
+        self.root.ids.img_2.opacity = 1
+        self.root.ids.img_1.source = image_1
+        self.root.ids.img_2.source = image_2
+
     def __init__(self, width, height, root: Widget, press_handler):
         self.width = width
         self.height = height
