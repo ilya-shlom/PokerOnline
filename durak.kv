@@ -52,6 +52,24 @@
       size: self.size
       source: './images/background.png'
 
+  Image:
+    source: 'images/PlayerIMG.png'
+    pos_hint: {'top': 1, 'right': 1}
+    size_hint: (0.18, 0.18)
+  Label:
+    text: 'Kolpakov_A_S'
+    pos_hint: {'y': 0.77, 'right': 1}
+    size_hint: (0.18, 0.18)
+
+  Image:
+    source: 'images/PlayerIMG.png'
+    pos_hint: {'y': 0.05, 'left': 1}
+    size_hint: (0.18, 0.18)
+  Label:
+    text: 'Антон'
+    pos_hint: {'bottom': 1, 'left': 1}
+    size_hint: (0.18, 0.18)
+
   GameMessageLabel:
     id: game_label
     pos: 0, self.width * 0.26
