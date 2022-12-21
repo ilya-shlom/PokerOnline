@@ -4,6 +4,7 @@ import subprocess
 import db
 import os
 import logging
+import random
 
 level = logging.DEBUG
 logger = logging.getLogger()
@@ -31,7 +32,7 @@ def index():
     return render_template("index.html", out=str(user), state=log_state)
 
 
-@app.route('/gamepage', methods=('GET', 'POST'))
+@app.route('/gamepage')
 def gamepage():
     log_state = 0
     user_id = session.get('user_id', default=None)
@@ -41,27 +42,13 @@ def gamepage():
         user = user_id
         print(user)
         user = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['username']
-
-        if request.method == 'POST':
-            win = request.form.get("win", False)
-            lose = request.form.get("lose", False)
-            database = db.get_db()
-            val = 'w' if win is not False else 'l'
-            try:
-                database.execute("INSERT INTO stats (player_id, res, using_cheats) VALUES (?, ?, ?)",
-                                 (user_id, val, 'n'))
-                database.commit()
-            except database.IntegrityError:
-                error = "some errors :_("
-            else:
-                # Здесь нужно поправить, т.к. не выводится юзер
-                return render_template("gamepage.html", out=str(user) + " win!")
+        game_key = database.execute('SELECT * FROM users WHERE id = ?', (user_id,)).fetchone()['game_key']
 
     # здесь тоже не выводится
     else:
         user = "Not logged in"
     # и здесь
-    return render_template("gamepage.html", out=str(user), state=log_state)
+    return render_template("gamepage.html", out=str(user) + " " + str(game_key), state=log_state)
 
 
 @app.route('/download_win')
@@ -125,8 +112,9 @@ def submit_acc():
             error = 'Password is required.'
         if error is None:
             try:
-                database.execute("INSERT INTO users (username, password) VALUES (?, ?)",
-                                 (username, password))
+                game_key = random.getrandbits(32)
+                database.execute("INSERT INTO users (username, password, game_key) VALUES (?, ?, ?)",
+                                 (username, password, game_key))
                 database.commit()
                 session.clear()
                 session['user_id'] = database.execute('SELECT * FROM users WHERE username = ?',

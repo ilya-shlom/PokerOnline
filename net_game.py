@@ -12,6 +12,8 @@ class DurakNetGame:
         self._remote_id = int(remote_id)
         self._remote_addr = remote_addr
 
+        assert self._my_id != 0 and self._remote_id != 0 and self._my_id != self._remote_id
+
         me_first = self._my_id < self._remote_id
         self._my_index = 0 if me_first else 1
         self._opp_index = 1 if me_first else 0

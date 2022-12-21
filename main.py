@@ -24,6 +24,14 @@ from kivy.clock import Clock, mainthread
 
 from discovery_protocol import DiscoveryProtocol
 from net_game import DurakNetGame
+import sqlite3
+
+db = sqlite3.connect('shuler.db', detect_types=sqlite3.PARSE_DECLTYPES)
+db.row_factory = sqlite3.Row
+
+user = db.execute('SELECT * FROM users WHERE id = ?', (1,)).fetchone()['username']
+print(user)
+
 
 
 PORT_NO = 37020

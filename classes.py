@@ -68,50 +68,50 @@ def check_card(c_on_t, inp, tr):
         return inp[0] == tr
 
 
-class Lobby:
-
-    def __init__(self, max_lobby: int, lobby_id: int, cheats_allowed: bool):
-
-        self.max_lobby = max_lobby
-        self.lobby_id = lobby_id
-        self.cheats_allowed = cheats_allowed
-        self.current_deck = CardDeck()
-        self.table = {}
-        self.used = []
-        self.current_players = []
-
-    def add_players(self, *players):
-        for player in players:
-            self.current_players.insert(random.randint(0, len(self.current_players)), player)
-
-    def kick_player(self, player: Player):
-        player.in_game = False
-        self.current_players.remove(Player)
-
-    def start_new_game(self):
-        self.current_deck = CardDeck()
-        self.current_deck.mix()
-        for player in self.current_players:
-            player.in_game = True
-
-    def put_on_table(self, player: Player, card: str):
-        player.put_card(card)
-        self.table.update({card: 0})
-
-    def cover_card(self, player: Player, t_card: str, c_card: str):
-        if check_card(t_card, c_card, self.current_deck.trump):
-            player.put_card(c_card)
-            self.table.update({c_card: 0, t_card: 0})
-            self.used.append(c_card)
-            self.used.append(t_card)
-
-    def give_cards(self, s_ind=0):
-        for ind in range(len(self.current_players)):
-            f_ind = s_ind + ind
-            if f_ind > len(self.current_players):
-                f_ind -= len(self.current_players)
-            while self.current_deck and self.current_players[f_ind].amount != 6:
-                self.current_players[f_ind].get_card(self.current_deck.get())
+# class Lobby:
+#
+#     def __init__(self, max_lobby: int, lobby_id: int, cheats_allowed: bool):
+#
+#         self.max_lobby = max_lobby
+#         self.lobby_id = lobby_id
+#         self.cheats_allowed = cheats_allowed
+#         self.current_deck = CardDeck()
+#         self.table = {}
+#         self.used = []
+#         self.current_players = []
+#
+#     def add_players(self, *players):
+#         for player in players:
+#             self.current_players.insert(random.randint(0, len(self.current_players)), player)
+#
+#     def kick_player(self, player: Player):
+#         player.in_game = False
+#         self.current_players.remove(Player)
+#
+#     def start_new_game(self):
+#         self.current_deck = CardDeck()
+#         self.current_deck.mix()
+#         for player in self.current_players:
+#             player.in_game = True
+#
+#     def put_on_table(self, player: Player, card: str):
+#         player.put_card(card)
+#         self.table.update({card: 0})
+#
+#     def cover_card(self, player: Player, t_card: str, c_card: str):
+#         if check_card(t_card, c_card, self.current_deck.trump):
+#             player.put_card(c_card)
+#             self.table.update({c_card: 0, t_card: 0})
+#             self.used.append(c_card)
+#             self.used.append(t_card)
+#
+#     def give_cards(self, s_ind=0):
+#         for ind in range(len(self.current_players)):
+#             f_ind = s_ind + ind
+#             if f_ind > len(self.current_players):
+#                 f_ind -= len(self.current_players)
+#             while self.current_deck and self.current_players[f_ind].amount != 6:
+#                 self.current_players[f_ind].get_card(self.current_deck.get())
 
 
 
