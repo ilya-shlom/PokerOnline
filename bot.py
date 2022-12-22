@@ -129,7 +129,7 @@ class Durak:
                     while card_index < len(self.players[my_index].cards):
                         card = self.players[my_index].cards[card_index]
                         if card[1] != self.trump_suit or \
-                                (1 for card in self.players[my_index].cards if card[1] == self.trump_suit):
+                                all(1 if card[1] == self.trump_suit else 0 for card in self.players[my_index].cards):
                             choice = f"a {card_index + 1}"
                             break
                         else:
