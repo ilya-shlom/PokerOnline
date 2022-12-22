@@ -1,12 +1,14 @@
 from render import ConsoleRenderer
-from durak import Durak
+from bot import Durak
 import random
+import time
 
 
 def local_game():
     # rng = random.Random(42)  # игра с фиксированным рандомом (для отладки)
     rng = random.Random()  # случайная игра
 
+    my_index = 0
     g = Durak(rng=rng)
     renderer = ConsoleRenderer()
 
@@ -16,7 +18,8 @@ def local_game():
         renderer.render_game(g, my_index=0)
 
         renderer.sep()
-        choice = input('Ваш выбор: ')
+        my_index, choice = g.simple_algorithm(my_index)
+        print(choice)
         # разбиваем на части: команда - пробел - номер карты
         parts = choice.lower().split(' ')
         if not parts:
@@ -60,6 +63,9 @@ def local_game():
         if g.winner:
             print(f'Игра окончена, победитель игрок: #{g.winner + 1}')
             break
+        time.sleep(5)
+
+
 
 
 if __name__ == '__main__':
