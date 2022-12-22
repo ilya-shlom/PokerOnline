@@ -138,9 +138,13 @@ class GameLayout:
 
     def update_deck(self, n):
         self.deck_card.counter = n
-        if self.deck_card.counter <= 0:
+        if self.deck_card.counter == 0:
             # сдвинуть за экран, если кончились карт
-            self.deck_card.set_animated_targets(1.5 * self.width, 0.5 * self.height, 0)
+            # self.deck_card.set_animated_targets(1.5 * self.width, 0.5 * self.height, 0)
+            self.deck_card.background_normal = 'images/opacity.png'
+            self.deck_card.background_down = 'images/opacity.png'
+            self.deck_card.font_name = 'static/assets/Arial.ttf'
+            self.deck_card.text = self.trump_suit
 
     def update_cards_in_hand(self, is_my, real_cards):
         """
@@ -175,6 +179,14 @@ class GameLayout:
         self.update_field()
 
         self.trump_card = self.make_card(trump, self.pos_of_trump())
+        if self.trump_card.suit == 'S':
+            self.trump_suit = '♠'
+        elif self.trump_card.suit == 'H':
+            self.trump_suit = '♥'
+        elif self.trump_card.suit == 'D':
+            self.trump_suit = '♦'
+        elif self.trump_card.suit == 'C':
+            self.trump_suit = '♣'
         self.deck_card = self.make_card(('', ''), self.pos_of_deck())
         self.update_deck(len(deck))
 
@@ -214,6 +226,7 @@ class GameLayout:
         self.opp_cards = []
         self.def_card = None
         self.trump_card = None
+        self.trump_suit = ''
         self.deck_card = None
 
         self.press_handler = press_handler

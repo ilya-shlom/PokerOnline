@@ -19,8 +19,12 @@ class Card(Button):
         if self.counter >= 0:
             # это колода. текст = кол-во карт
             self.text = str(int(self.counter))
-            self.background_normal = 'images/deck.png'
-            self.background_down = 'images/deck.png'
+            if self.counter > 1:
+                self.background_normal = 'images/deck.png'
+                self.background_down = 'images/deck.png'
+            else:
+                self.background_normal = 'images/back.png'
+                self.background_down = 'images/back.png'
             # self.color = (1, 1, 1, 1)
         elif not self.opened:
             # карта закрыта (рука соперника)
