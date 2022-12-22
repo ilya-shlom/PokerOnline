@@ -2,7 +2,7 @@ from kivy.config import Config
 from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
-
+import asynckivy as ak
 from util import rand_id, rand_circle_pos, debug_start, get_info, put_info
 
 debug_start()
@@ -45,7 +45,6 @@ class DurakFloatApp(App):
     # fixme: возможно эти свойства уже доступны через API Kivy?
     width = NumericProperty()
     height = NumericProperty()
-
     texture = ObjectProperty()
 
     def show_error(self, message):
@@ -208,12 +207,22 @@ class DurakFloatApp(App):
         self.game.start()
 
         self.locked_controls = False
-
         self.toggle_button(self.disconnect_button, True)
         self.toggle_button(self.finish_button, True)
 
         self.game_label.update_message('Соперник найден!', fade_after=2.0)
         self.display_whose_turn()
+
+    def delete_id_widgets(self):
+        self.root.remove_widget(self.root.ids.id_input)
+
+    async def id_check(self):
+        self.game_label.update_message("Введите ваш id")
+        _, new_id = await ak.event(self.root.ids.id_input, 'text', filter=lambda _, text: len(text) == 5)
+        self.my_pid = int(new_id)
+        self.delete_id_widgets()
+        self.game_label.update_message("Поиск соперника...")
+        self.scan()
 
     def scan(self, *_):
         # начать сканирование, если еще не начато
@@ -276,10 +285,8 @@ class DurakFloatApp(App):
 
     def on_start(self):
         super().on_start()
-
         self.width, self.height = Window.size
         self.layout = GameLayout(self.width, self.height, self.root, self.on_press_card)
-
         self.game_label: GameMessageLabel = self.root.ids.game_label
         self.error_label: GameMessageLabel = self.root.ids.error_label
         self.finish_button: Button = self.root.ids.finish_turn_button
@@ -288,11 +295,11 @@ class DurakFloatApp(App):
 
         self.animator = AnimationSystem(self.root)
         self.animator.run()
-
         self.locked_controls = True
+        self.on_enter()
 
-        self.game_label.update_message("Поиск соперника...")
-        self.scan()
+    def on_enter(self):
+        ak.start(self.id_check())
 
     def on_request_close(self, *args):
         self.game.stop()

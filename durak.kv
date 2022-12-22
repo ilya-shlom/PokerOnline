@@ -52,6 +52,29 @@
       size: self.size
       source: './images/background.png'
 
+  TextInput:
+    id: id_input
+    text: ''
+    font_size: 65
+    size_hint: (1, .15)
+    multiline: False
+    size_hint: .7 ,.13 #.01
+    pos_hint: {"center_x":0.5,"center_y":0.5}
+    foreground_color: [1,1,1,1]
+    background_color: [0,0,0,0]
+    background_image: ""
+    background_normal: ""
+    background_active: ""
+    canvas.before:
+      Color:
+        rgba: (0,0,0,.3) if root.ids.id_input.focused else [1,1,1,.5]
+      RoundedRectangle:
+        size: self.size
+        pos: self.pos
+        radius: 20,
+
+
+
   Image:
     id: img_2
     source: ''

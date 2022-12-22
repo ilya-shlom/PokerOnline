@@ -12,44 +12,33 @@ SUITS = [SPADES, HEARTS, DIAMS, CLUBS]
 # достоинтсва карт
 ACE = 'E'
 NOMINALS = ['6', '7', '8', '9', 'A', 'B', 'C', 'D', ACE]
-NOMINALS_SHORT = ['B', 'C', 'D', ACE]
 
 # поиск индекса по достоинству
-NAME_TO_VALUE = {n: i for i, n in enumerate(NOMINALS)}
+INDEX = {n: i for i, n in enumerate(NOMINALS)}
 
 # карт в руке при раздаче
 CARDS_IN_HAND_MAX = 6
 
 N_PLAYERS = 2
 
-# эталонная колода (каждая масть по каждому номиналу) - 36 карт
 DECK = [(nom, suit) for nom in NOMINALS for suit in SUITS]
-DECK_SHORT = [(nom, suit) for nom in NOMINALS_SHORT for suit in SUITS]
 
 
 class Player:
     def __init__(self, index, cards):
         self.index = index
-        self.cards = list(map(tuple, cards))  # убедимся, что будет список кортежей
+        self.cards = list(map(tuple, cards))
 
     def take_cards_from_deck(self, deck: list):
-        """
-        Взять недостающее количество карт из колоды
-        Колода уменьшится
-        :param deck: список карт колоды
-        """
-        lack = max(0, CARDS_IN_HAND_MAX - len(self.cards))  # сколько не хватает
-        n = min(len(deck), lack)
-        new_cards = deck[:n]  # первые n карт сверхку колоды
+        lack = max(0, CARDS_IN_HAND_MAX - len(self.cards))
+        amount = min(len(deck), lack)
+        new_cards = deck[:amount]
         self.add_cards(new_cards)
-        del deck[:n]
+        del deck[:amount]
         return new_cards
 
     def sort_hand(self):
-        """
-        Сортирует карты по достоинству и масти
-        """
-        self.cards.sort(key=lambda c: (NAME_TO_VALUE[c[0]], c[1]))
+        self.cards.sort(key=lambda card: (INDEX[card[0]], card[1]))
         return self
 
     def add_cards(self, cards):
@@ -143,8 +132,8 @@ class Durak:
         nom2, suit2 = def_card
 
         # преобразуем строку-достоинство в численные характеристики
-        nom1 = NAME_TO_VALUE[nom1]
-        nom2 = NAME_TO_VALUE[nom2]
+        nom1 = INDEX[nom1]
+        nom2 = INDEX[nom2]
 
         if suit2 == self.trump_suit:
             # если козырь, то бьет любой некозырь или козырь младше
