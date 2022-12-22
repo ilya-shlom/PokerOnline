@@ -3,7 +3,7 @@ from kivy.lang import Builder
 from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 
-from util import rand_id, rand_circle_pos, debug_start
+from util import rand_id, rand_circle_pos, debug_start, get_info, put_info
 
 debug_start()
 
@@ -31,7 +31,6 @@ db.row_factory = sqlite3.Row
 
 user = db.execute('SELECT * FROM users WHERE id = ?', (1,)).fetchone()['username']
 print(user)
-
 
 
 PORT_NO = 37020
@@ -140,8 +139,10 @@ class DurakFloatApp(App):
             if self.game.winner == self.game.ME:
                 self.game_label.update_message('Вы победили!')
             else:
+                # self.game.res_game = 'l' это есть в файле net game 124 строка функция winner
                 self.error_label.update_message('Вы проиграли!')
                 self.game_label.update_message('')
+            put_info(self.my_pid, self.game.res_game)
         self.locked_controls = True
         self.toggle_buttons()
 
@@ -150,7 +151,9 @@ class DurakFloatApp(App):
         # синхорнизировать состояние игры и GUI
         if not self.game_init:
             self.game_init = True
-            self.layout.get_players('images/PlayerIMG.png', 'images/PlayerIMG.png', 'p_1', 'p_2')
+            inf_1 = get_info(self.my_pid)
+            inf_2 = get_info(self.peer_id)
+            self.layout.get_players('images/PlayerIMG.png', 'images/PlayerIMG.png', inf_1[1], inf_2[1])
             self.layout.make_cards(self.game.my_cards, self.game.opp_cards, self.game.state.trump, self.game.state.deck)
 
         if self.game.winner is not None:
@@ -197,7 +200,7 @@ class DurakFloatApp(App):
     def on_found_peer(self, addr, peer_id):
         print(f'Найден соперник {peer_id}@{addr}')
         self.discovery = None
-
+        self.peer_id = peer_id
         # соперник найден, создаем новую игру с ним по сети
         self.game = DurakNetGame(self.my_pid, peer_id, addr[0], [PORT_NO, PORT_NO_AUX])
         self.game.on_state_updated = self.on_game_state_update
@@ -221,8 +224,9 @@ class DurakFloatApp(App):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
+        self.peer_id = None
         self.locked_controls = False
-        self.my_pid = rand_id()
+        self.my_pid = 25035
 
         self.game: DurakNetGame = None
         self.game_init = False

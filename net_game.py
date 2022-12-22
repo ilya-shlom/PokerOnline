@@ -11,6 +11,7 @@ class DurakNetGame:
         self._my_id = int(my_id)
         self._remote_id = int(remote_id)
         self._remote_addr = remote_addr
+        self.res_game = ''
 
         assert self._my_id != 0 and self._remote_id != 0 and self._my_id != self._remote_id
 
@@ -120,6 +121,7 @@ class DurakNetGame:
     @property
     def winner(self):
         if self.state.winner is not None:
+            self.res_game = 'w' if self._my_index == self.state.winner else 'l'
             return self.ME if self._my_index == self.state.winner else self.OPPONENT
 
     @property

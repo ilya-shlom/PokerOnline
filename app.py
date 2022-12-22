@@ -114,7 +114,7 @@ def submit_acc():
             error = 'Password is required.'
         if error is None:
             try:
-                game_key = random.getrandbits(32)
+                game_key = random.getrandbits(16)
                 database.execute("INSERT INTO users (username, password, game_key) VALUES (?, ?, ?)",
                                  (username, password, game_key))
                 database.commit()
