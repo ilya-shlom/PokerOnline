@@ -63,7 +63,7 @@ def local_game():
         if g.winner:
             print(f'Игра окончена, победитель игрок: #{g.winner + 1}')
             break
-        time.sleep(5)
+        # time.sleep(1)
 
 
 

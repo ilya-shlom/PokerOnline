@@ -24,6 +24,12 @@ N_PLAYERS = 2
 DECK = [(nom, suit) for nom in NOMINALS for suit in SUITS]
 
 
+def get_key(d, value):
+    for k, v in d.items():
+        if v == value:
+            return k
+
+
 class Bot:
     def __init__(self, index, cards):
         self.index = index
@@ -117,26 +123,29 @@ class Durak:
         card_index = 0
         choice = 'q'
         print(my_index)
-        if self.attacker_index == my_index:
-            if len(self.field) == 0:
+        if self.winner is None:
+            if self.attacker_index == my_index:
+                if len(self.field) == 0:
+                    while card_index < len(self.players[my_index].cards):
+                        card = self.players[my_index].cards[card_index]
+                        if card[1] != self.trump_suit:
+                            choice = f"a {card_index + 1}"
+                            break
+                        else:
+                            card_index += 1
+                else:
+                    choice = 'f'
+
+            elif (self.attacker_index + 1) % 2 == my_index:
                 while card_index < len(self.players[my_index].cards):
                     card = self.players[my_index].cards[card_index]
-                    if card[1] != self.trump_suit:
-                        choice = f"a {card_index + 1}"
+                    if self.can_beat(get_key(self.field, None), card):
+                        choice = f"d {card_index + 1}"
                         break
                     else:
                         card_index += 1
-
-        elif self.attacker_index + 1 == my_index:
-            while card_index < len(self.players[my_index].cards):
-                card = self.players[my_index].cards[card_index]
-                if self.can_beat(self.field[0], card):
-                    choice = f"d {card_index + 1}"
-                    break
                 else:
-                    card_index += 1
-            if card_index == 6:
-                choice = "f"
+                    choice = "f"
 
         my_index += 1
         return my_index % 2, choice
