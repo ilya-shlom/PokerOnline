@@ -123,7 +123,7 @@ class Durak:
         card_index = 0
         choice = 'q'
         print(my_index)
-        if self.winner is None:
+        if len(self.players[my_index].cards) > 0 and len(self.players[(my_index + 1) % 2].cards) > 0:
             if self.attacker_index == my_index:
                 if len(self.field) == 0:
                     while card_index < len(self.players[my_index].cards):
