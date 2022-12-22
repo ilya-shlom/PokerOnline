@@ -217,7 +217,7 @@ class DurakFloatApp(App):
         self.root.remove_widget(self.root.ids.id_input)
 
     async def id_check(self):
-        self.game_label.update_message("Введите ваш id")
+        self.game_label.update_message("Введите ваш код")
         _, new_id = await ak.event(self.root.ids.id_input, 'text', filter=lambda _, text: len(text) == 5)
         self.my_pid = int(new_id)
         self.delete_id_widgets()
