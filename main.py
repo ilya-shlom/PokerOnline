@@ -235,6 +235,7 @@ class DurakFloatApp(App):
 
         self.peer_id = None
         self.locked_controls = False
+        self.my_pid = None
 
         self.game: DurakNetGame = None
         self.game_init = False
