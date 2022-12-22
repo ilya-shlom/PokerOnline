@@ -34,7 +34,7 @@ class MainLayout(FloatLayout):
     ...
 
 
-class DurakFloatApp(App):
+class ShulerOnlineApp(App):
     width = NumericProperty()
     height = NumericProperty()
     texture = ObjectProperty()
@@ -299,4 +299,4 @@ class DurakFloatApp(App):
 
 
 if __name__ == '__main__':
-    DurakFloatApp().run()
+    ShulerOnlineApp().run()
