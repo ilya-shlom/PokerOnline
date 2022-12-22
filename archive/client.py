@@ -12,7 +12,7 @@ from kivy.lang import Builder
 from kivy.core.text import LabelBase
 
 
-Builder.load_file('bg.kv')
+Builder.load_file('archive/bg.kv')
 LabelBase.register(name='NAMU-1990', fn_regular='static/assets/NAMU-1990.ttf')
 
 Config.set('graphics', 'resizable', 0)

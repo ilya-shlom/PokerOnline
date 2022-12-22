@@ -13,8 +13,8 @@
   height: '147.9dp'
   size_hint: None, None
 
-  background_normal: 'resources/rounded_corners.png'
-  background_down: 'resources/rounded_corners.png'
+  background_normal: 'images/rounded_corners.png'
+  background_down: 'images/rounded_corners.png'
 
   background_color: (1, 1, 1, 1) if not root.selected else (0.9, 0.9, 0.9, 1)
   opacity: 1 if root.state == 'normal' else .8
@@ -38,12 +38,13 @@
 <GameButton@Button>:
   text: ''
   visible: False
-  background_normal: 'resources/rounded_corners.png'
-  background_down: 'resources/rounded_corners.png'
   size_hint: (0.3, 0.06)
   color: 0, 0, 0, 1
   opacity: 1 if self.state == 'normal' else .8
   border: (21, 21, 21, 21)
+  background_normal: 'images/rounded_corners.png'
+  background_down: 'images/rounded_corners.png'
+  font_name: 'static/assets/NAMU-1990.ttf'
 
 <MainLayout@FloatLayout>:
   canvas.before:
