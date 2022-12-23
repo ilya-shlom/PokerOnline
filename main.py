@@ -155,14 +155,14 @@ class ShulerOnlineApp(App):
             up = self.game.state.last_update
             if up.get('action') == 'finish_turn':
                 self.current_turn += 1
-            print(self.current_turn)
             self.predictions = {}
             for card in self.game.my_cards:
                 if card[1] != self.game.state.trump_suit:
                     loaded_model = pickle.load(open(f'models/model{card[0]}.sav', 'rb'))
                 else:
                     loaded_model = pickle.load(open(f'models/model{card[0]}_trump.sav', 'rb'))
-                self.predictions.update({card: loaded_model.predict([[self.current_turn]])})
+                maxi, curr = loaded_model.predict([[13]]), loaded_model.predict([[self.current_turn]])
+                self.predictions.update({card: curr / (abs(maxi) + abs(curr))})
                 self.layout.update_card_text(self.predictions)
             print(f'update: {up}')
 

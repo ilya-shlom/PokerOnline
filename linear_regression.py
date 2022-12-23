@@ -16,7 +16,7 @@ import pickle
 #
 # pickle.dump(model, open(f'models/model6_trump.sav', 'wb'))
 
-loaded_model = pickle.load(open('models/modelE_trump.sav', 'rb'))
+loaded_model = pickle.load(open('models/model6.sav', 'rb'))
 
 for i in range(20):
     print(f'{i} - {loaded_model.predict([[i]])}')
