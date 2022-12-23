@@ -156,6 +156,7 @@ class ShulerOnlineApp(App):
             if up.get('action') == 'finish_turn':
                 self.current_turn += 1
             print(self.current_turn)
+            self.predictions = {}
             for card in self.game.my_cards:
                 if card[1] != self.game.state.trump:
                     loaded_model = pickle.load(open(f'models/model{card[0]}.sav', 'rb'))
