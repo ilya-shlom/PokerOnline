@@ -159,6 +159,18 @@ class GameLayout:
                 wcard.bring_to_front()  # чтобы каждая следующая была поверх предыдущей
                 wcard.set_animated_targets(*self.pos_of_hand(i, n, is_my))
 
+    def update_card_text(self, predictions):
+        for card in predictions.keys():
+            wcard = self.card2widget.get(card, None)
+            if wcard:
+                wcard.update_prediction(predictions[card])
+
+
+    # def update_card_prediction(self, prediction: dict):
+    #     n = len(real_cards)
+    #     for i, card in enumerate(real_cards):
+    #         wcard = self.card2widget.get(card, None)
+
     def update_field(self):
         n = len(self.field)
         for i, (c1, c2) in enumerate(self.field):

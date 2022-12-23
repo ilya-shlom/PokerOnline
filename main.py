@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 import asynckivy as ak
 from util import rand_id, rand_circle_pos, debug_start, get_info, put_info
+import sklearn
 import pickle
 
 debug_start()
@@ -160,7 +161,8 @@ class ShulerOnlineApp(App):
                     loaded_model = pickle.load(open(f'models/model{card[0]}.sav', 'rb'))
                 else:
                     loaded_model = pickle.load(open(f'models/model{card[0]}_trump.sav', 'rb'))
-                self.predictions = dict.update({card: loaded_model.predict([[self.current_turn]])})
+                self.predictions.update({card: loaded_model.predict([[self.current_turn]])})
+                self.layout.update_card_text(self.predictions)
             print(f'update: {up}')
 
             action = up.get('action')

@@ -36,7 +36,11 @@ class Card(Button):
             s, n = self.suit, self.nominal
             self.background_normal = f'images/cards/{s}{n}.png'
             self.background_down = f'images/cards/{s}{n}.png'
+            # self.text
             # self.color = (0.8, 0, 0, 1) if self.suit in (DIAMS, HEARTS) else (0, 0, 0, 1)
+
+    def update_prediction(self, pred):
+        self.text = str(pred)
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
