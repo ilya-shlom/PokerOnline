@@ -26,7 +26,7 @@ class GameLayout:
 
         ang = min_ang + (max_ang - min_ang) / (n + 1) * (i + 1)
         ang_r = ang / 180 * pi
-        m = 1 if is_my else -1
+        m = 1.07 if is_my else -1
         return cx + r * sin(ang_r), cy + m * r, 0
 
     def pos_of_trump(self):
@@ -163,7 +163,7 @@ class GameLayout:
         for card in predictions.keys():
             wcard = self.card2widget.get(card, None)
             if wcard:
-                wcard.update_prediction(predictions[card])
+                wcard.update_prediction(str(*predictions[card])[:4])
 
 
     # def update_card_prediction(self, prediction: dict):
@@ -203,11 +203,13 @@ class GameLayout:
         self.update_deck(len(deck))
 
     def destory_card(self, wcard: Card):
+        wcard.update_prediction('')
         wcard.destroy_card_after_delay(1.0)
         del self.card2widget[wcard.as_tuple]
 
     def throw_away_card(self, wcard: Card):
         if wcard is not None:
+            wcard.update_prediction('')
             wcard.set_animated_targets(self.width * 0.9, self.height * 0.5, 360)
             wcard.background_normal = 'images/drawn.png'
             wcard.background_down = 'images/drawn.png'
@@ -215,6 +217,7 @@ class GameLayout:
     def remove_all_cards_animated(self):
         for wcard in list(self.card2widget.values()):
             if wcard:
+                wcard.update_prediction('')
                 wcard.set_animated_targets(*rand_circle_pos(), 0)
                 self.destory_card(wcard)
         self.card2widget = {}
