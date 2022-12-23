@@ -3,15 +3,14 @@ from bot import Durak, DECK
 import random
 import time
 
-card_appearance = dict.fromkeys(DECK)
-for card in tuple(card_appearance.keys()):
-    card_appearance.update({card: [None, None, None]})
-
 
 def local_game():
     # rng = random.Random(42)  # игра с фиксированным рандомом (для отладки)
     rng = random.Random()  # случайная игра
     turn = 0
+    card_appearance = dict.fromkeys(DECK)
+    for card in tuple(card_appearance.keys()):
+        card_appearance.update({card: [None, None, None]})
 
     my_index = 0
     g = Durak(rng=rng)
@@ -20,7 +19,7 @@ def local_game():
     renderer.help()
 
     while not g.winner:
-        print(f'Ход {turn}')
+        # print(f'Ход {turn}')
         renderer.render_game(g, my_index=0)
 
         renderer.sep()
@@ -33,7 +32,7 @@ def local_game():
                 else:
                     card_appearance[card_from_hand][1] = turn
         my_index, choice = g.simple_algorithm(my_index)
-        print(choice)
+        # print(choice)
         # разбиваем на части: команда - пробел - номер карты
         parts = choice.lower().split(' ')
         if not parts:
@@ -44,13 +43,14 @@ def local_game():
         try:
             if command == 'f':
                 r = g.finish_turn()
-                print(f'Ход окончен: {r}')
+                # print(f'Ход окончен: {r}')
                 turn += 1
             elif command == 'a':
                 index = int(parts[1]) - 1
                 card = g.attacking_player[index]
                 if not g.attack(card):
-                    print('Вы не можете ходить с этой карты!')
+                    pass
+                    # print('Вы не можете ходить с этой карты!')
             elif command == 'd':
                 index = int(parts[1]) - 1
                 new_card = g.defending_player[index]
@@ -69,7 +69,8 @@ def local_game():
 
                 old_card = list(g.field.keys())[def_index]
                 if not g.defend(old_card, new_card):
-                    print('Не можете так отбиться')
+                    pass
+                    # print('Не можете так отбиться')
             elif command == 'q':
                 for card_final in DECK:
                     if card_final[1] != g.trump_suit:
@@ -80,20 +81,22 @@ def local_game():
                         with open(f'game_logs/{card_final[0]}_trump.csv', 'a') as data:
                             res = 1 if len(g.players[card_appearance[card_final][2]].cards) == 0 else 0
                             data.write(f'{card_appearance[card_final][1] - card_appearance[card_final][0]};{res};\n')
-                print(card_appearance)
-                print('QUIT!')
+                # print(card_appearance)
+                # print('QUIT!')
                 break
         except IndexError:
-            print('Неправильный выбор карты')
+            pass
+            # print('Неправильный выбор карты')
         except ValueError:
-            print('Введите число через пробел после команды')
+            pass
+            # print('Введите число через пробел после команды')
 
         if g.winner:
-            print(f'Игра окончена, победитель игрок: #{g.winner + 1}')
+            # print(f'Игра окончена, победитель игрок: #{g.winner + 1}')
             break
         # time.sleep(1)
 
 
 if __name__ == '__main__':
-    for i in range(1):
+    for i in range(1000000):
         local_game()

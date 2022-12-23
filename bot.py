@@ -122,7 +122,7 @@ class Durak:
     def simple_algorithm(self, my_index):
         card_index = 0
         choice = 'q'
-        print(my_index)
+        # print(my_index)
         if len(self.players[my_index].cards) > 0 and len(self.players[(my_index + 1) % 2].cards) > 0:
             if self.attacker_index == my_index:
                 if len(self.field) == 0:

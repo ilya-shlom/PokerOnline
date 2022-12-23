@@ -87,6 +87,7 @@ class Durak:
         return next(card for card in self.deck if card[0] != ACE)
 
     def __init__(self, rng: random.Random = None, deck=None):
+        self.turn = 0
         self.attacker_index = 0  # индекс атакующего игрока
 
         self.rng = rng or random.Random()  # генератор случайных чисел

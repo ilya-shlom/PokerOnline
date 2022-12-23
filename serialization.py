@@ -6,6 +6,7 @@ class DurakSerialized(Durak):
         if j is None:
             super().__init__()
         else:
+            self.turn = 0
             self.trump = j["trump"]
             self.attacker_index = j["attacker_index"]
             self.players = [Player(p['index'], p['cards']) for p in j["players"]]
@@ -29,4 +30,5 @@ class DurakSerialized(Durak):
             ],
             "last_update": self.last_update
         }
+        self.turn += 1
         return j

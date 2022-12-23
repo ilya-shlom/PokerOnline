@@ -109,6 +109,15 @@ class ShulerOnlineApp(App):
     def update_hands(self):
         self.layout.update_cards_in_hand(is_my=True, real_cards=self.game.my_cards)
         self.layout.update_cards_in_hand(is_my=False, real_cards=self.game.opp_cards)
+        for card_in_hand in self.game.my_cards:
+            if card_in_hand != ('', ''):
+                if self.card_appearance[card_in_hand] == [None, None]:
+                    self.card_appearance[card_in_hand][0] = self.game.turn
+                    self.card_appearance[card_in_hand][1] = self.game.turn
+                else:
+                    self.card_appearance[card_in_hand][1] = self.game.turn
+                print(self.card_appearance)
+                print(f'{self.card_appearance[card_in_hand]}')
 
     def reset(self):
         if self.game:
@@ -228,6 +237,9 @@ class ShulerOnlineApp(App):
         self.peer_id = None
         self.locked_controls = False
         self.my_pid = None
+        self.card_appearance = dict.fromkeys(DECK)
+        for card in tuple(self.card_appearance.keys()):
+            self.card_appearance.update({card: [None, None]})
 
         self.game: DurakNetGame = None
         self.game_init = False

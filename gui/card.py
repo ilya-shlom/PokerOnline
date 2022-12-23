@@ -1,7 +1,7 @@
 from kivy.clock import Clock
 from kivy.uix.button import Button
 from kivy.properties import StringProperty, BooleanProperty, NumericProperty
-from durak import NOMINALS, DIAMS, HEARTS
+from durak import DECK
 
 PORT_NO = 37020
 PORT_NO_AUX = 37021
@@ -44,6 +44,9 @@ class Card(Button):
         self.target_rotation = 0
         self.bind(counter=self.update_text)
         self.bind(opened=self.update_text)
+        # self.card_appearance = dict.fromkeys(DECK)
+        # for card in tuple(self.card_appearance.keys()):
+        #     self.card_appearance.update({card: [None, None]})
 
     def set_animated_targets(self, x, y, ang):
         self.target_position = x, y
