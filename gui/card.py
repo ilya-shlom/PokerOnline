@@ -44,9 +44,6 @@ class Card(Button):
         self.target_rotation = 0
         self.bind(counter=self.update_text)
         self.bind(opened=self.update_text)
-        # self.card_appearance = dict.fromkeys(DECK)
-        # for card in tuple(self.card_appearance.keys()):
-        #     self.card_appearance.update({card: [None, None]})
 
     def set_animated_targets(self, x, y, ang):
         self.target_position = x, y

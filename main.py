@@ -4,6 +4,7 @@ from kivy.uix.button import Button
 from kivy.uix.floatlayout import FloatLayout
 import asynckivy as ak
 from util import rand_id, rand_circle_pos, debug_start, get_info, put_info
+import pickle
 
 debug_start()
 
@@ -154,6 +155,12 @@ class ShulerOnlineApp(App):
             if up.get('action') == 'finish_turn':
                 self.current_turn += 1
             print(self.current_turn)
+            for card in self.game.my_cards:
+                if card[1] != self.game.state.trump:
+                    loaded_model = pickle.load(open(f'models/model{card[0]}.sav', 'rb'))
+                else:
+                    loaded_model = pickle.load(open(f'models/model{card[0]}_trump.sav', 'rb'))
+                self.predictions = dict.update({card: loaded_model.predict([[self.current_turn]])})
             print(f'update: {up}')
 
             action = up.get('action')
@@ -239,6 +246,7 @@ class ShulerOnlineApp(App):
         self.discovery = None
         self.selected_card = None
         self.current_turn = 0
+        self.predictions = {}
 
     def build(self):
         Builder.load_file('durak.kv')
